@@ -1,0 +1,38 @@
+{
+    "pipes": [
+        <#if body.bpmnError??>
+            {
+                "type": "transform",
+                "name": "transformObjectToJson"
+            }
+        <#else>
+            {
+                "name": "addMilesHeaders",
+                "type": "script"
+            },
+            {
+                "name": "addMilesDoucmentUpdate",
+                "type": "body = body; headers["fileName"] = body.fileName, headers; headers["fileContent"] = body.fileName"
+            },
+            {
+                "type": "action"
+                "name": "Miles_GetDocument"
+                "script": "MILES_sessionID = body.MILES_sessionID"
+            },
+            {
+                "type": "action",
+                "name": "Miles_UpdateDocument",
+                "script": "headers.handleSoapExceptionTemplate = 'Miles_UpdateDocument_error'; headers.handleExceptionTemplate = 'Miles_UpdateDocument_error'; MILES_sessionID = body.MILES_sessionID"
+            },
+            {
+                "type": "transform",
+                "name": "Miles_UpdateDocument_result"
+            },
+            {
+                "type": "action",
+                "name": "Miles_RemoveSessionID_piper",
+                "script" : "body = [objectToReturn: body, MILES_sessionID: MILES_sessionID]"
+            }
+        </#if>
+    ]
+}
