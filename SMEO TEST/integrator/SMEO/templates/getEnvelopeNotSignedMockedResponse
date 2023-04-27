@@ -1,0 +1,26 @@
+{
+    "status": "InProgress",
+    "sendDate": "2022-10-31T12:26:43.153Z",
+    "signers": [
+        {
+            "firstName": "Raoul",
+            "lastName": "Ramsaran",
+            "recipientType": "Signer",
+            "status": "Signed",
+            "signedDate": "2022-10-31T12:28:53.723Z"
+        },
+        {
+            "firstName": "Peter",
+            "lastName": "Peters",
+            "recipientType": "Signer",
+            "status": "NotSigned",
+            "signDocumentsUrl": "https://intm-sign.withesignature.com/eSAWWebPublic/workstepredirector/sign?identifier=jNIi9PCzsoLKQIRbZgJlZ9AohjXfX7m5TdiYcyda8t4~aH7qfpjVqI5D/YIScZP56QKrp4cpsD3l0Ciwzm0p1g=="
+        },
+        {
+            "firstName": "Jan",
+            "lastName": "Jansen",
+            "recipientType": "Signer",
+            "status": "NotSigned"
+        }
+    ]
+}

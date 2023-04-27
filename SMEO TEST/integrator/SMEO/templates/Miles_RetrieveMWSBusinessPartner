@@ -1,0 +1,10 @@
+<#assign businessPartnerId = body.businessPartnerId/>
+<#if headers.restConnectorProperties.environment != "DHC">
+    <#assign businessPartnerId = "975667"/>
+</#if>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SofEnvelope>
+    <partnerid>${businessPartnerId}</partnerid>
+    <sessionID>${body.MILES_sessionID}</sessionID>
+</SofEnvelope>

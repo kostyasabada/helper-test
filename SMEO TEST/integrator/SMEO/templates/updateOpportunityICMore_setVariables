@@ -1,0 +1,15 @@
+<#if body.errorOccured??>
+    <@printObjectToJson source=body /> 
+<#else>
+{
+   "status":"true",
+   "saveToDB":[
+      {
+         "variableName":"status",
+         "value":"Opportunity set to GO",
+         "type":"STRING"
+      }
+   ]
+}
+</#if>
+

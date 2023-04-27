@@ -1,0 +1,17 @@
+{
+    "pipes": [
+        {
+            "name": "addMilesHeaders",
+            "type": "script"
+        },
+        {
+            "type": "action",
+            "name": "Miles_GetSessionID",
+            "script": "headers.handleSoapExceptionTemplate = 'GetMilesSessionId_error'; headers.handleExceptionTemplate = 'GetMilesSessionId_error'"
+        },
+        {
+            "type": "transform",
+            "name": "Miles_GetSessionID_setVariables"
+        }
+    ]
+}

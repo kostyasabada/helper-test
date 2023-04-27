@@ -1,0 +1,19 @@
+def variablesToSend = ['camundaId', 'firstname', 'surname', 'emailTo', 'carMakeModel', 'manualDecisionDescription'];
+//def variablesToSend = ['camundaId', 'firstname', 'surname', 'emailTo', 'carMakeModel'];
+def formElements = body.elements;
+def fieldValues = [];
+def camundaId = camundaId;
+
+formElements.each{element-> 
+    if(variablesToSend.any{variable -> variable == element.htmlName }){
+        fieldValues.addAll([
+            'id': element.id,
+            'name': element.htmlName,
+            'value': this[element.htmlName]
+        ])
+        }
+}
+
+body = [fieldValues : fieldValues];
+
+return body;

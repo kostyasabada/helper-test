@@ -1,0 +1,15 @@
+{
+    "processVariables": {
+        "Status": {
+            "value": "${body.payload.status}",
+            "type": "String"
+        }
+    },
+    "saveToDB": [
+        {
+            "variableName": "status",
+            "type": "STRING",
+            "value": "${body.payload.status}"
+        }
+    ]
+}
