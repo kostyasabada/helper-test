@@ -1,0 +1,2 @@
+headers['businessPartnerId']=body.businessPartnerId;
+headers['customerStatus']=body.customerStatus;
