@@ -1,0 +1,8 @@
+{
+    "pipes": [
+       {
+       "name": "checkData",
+       "type": "action"
+       }
+    ]
+}

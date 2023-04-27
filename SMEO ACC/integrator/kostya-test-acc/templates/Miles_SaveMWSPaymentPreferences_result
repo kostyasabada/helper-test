@@ -1,0 +1,31 @@
+ <#if body.metadata?? && body.metadata.errorinfo?? && body.metadata.errorinfo.message?has_content>
+    {
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "${body.metadata.errorinfo.message}"
+        }
+    }
+<#elseif body.metadata?? && body.metadata.operationstatus?? && body.metadata.operationstatus._businesserror == "false" && body.metadata.operationstatus._calculationerror == "false" && body.metadata.operationstatus._technicalerror == "false">
+    {
+        "status": "true",
+        "processVariables": {
+            "paymentPreferenceId": "${body.data.MWSPaymentPreference_Set.MWSPaymentPreference.id}"
+        },
+        "saveToDB": [
+            {
+                "variableName": "paymentPreferenceId",
+                "value": "${body.data.MWSPaymentPreference_Set.MWSPaymentPreference.id}",
+                "type": "STRING"
+            }
+        ]
+    }
+<#else>
+    {   
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "SaveMWSPaymentPreferencesForPartner error"
+        }
+    }
+</#if>

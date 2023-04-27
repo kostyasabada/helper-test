@@ -1,0 +1,39 @@
+<#assign aDateTime = .now>
+{
+    "messageName": "StartCancelVehicleRequestSubProcess",
+    "processInstanceId": "${body.variables.MainProcessInstanceId}",
+    "processVariables": {
+        <#list body.variables as key, value>
+            <#if key?starts_with("SAVE_")>
+            "${key?keep_after("SAVE_")}":{
+                <#if value??>
+                "value": "${value}",
+                <#else>
+                "value": null,
+                </#if>
+                "type": "String"
+            },
+            </#if>
+        </#list>
+        "MainProcessInstanceId": {
+            "value": "${body.variables.MainProcessInstanceId}",
+            "type": "String"
+        },
+        "cancellationType": {
+            "value": "${body.variables.CancellationType!}",
+            "type": "String"
+        },
+        "EndProcessDateTime": {
+            "value": "${aDateTime?iso_utc}",
+            "type": "String"
+        }
+    },
+    "saveToDB": [
+        {
+            "variableName": "status",
+            "type": "STRING",
+            "value": "${getCancellationStatus(body.variables.CancellationType!)}"
+        }
+
+    ]
+}
