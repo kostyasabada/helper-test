@@ -1,0 +1,20 @@
+{
+    "pipes": [
+        {
+            "name": "Miles_GetSessionID_piper",
+            "type": "action",
+            "script": "businessPartnerId = body.variables.businessPartnerId; QuoteIdWithoutPrefix = body.variables.QuoteIdWithoutPrefix"
+        },
+        {
+            "name": "Miles_ChangeCustomerOnQuoteWithSessionId_piper",
+            "type": "action",
+            "script": "body = body; body.businessPartnerId = businessPartnerId; body.QuoteIdWithoutPrefix = QuoteIdWithoutPrefix; MILES_sessionID = body.MILES_sessionID;"
+        },
+
+        {
+            "type": "action",
+            "name": "Miles_RemoveSessionID_piper",
+            "script" : "body = [objectToReturn: body, MILES_sessionID: MILES_sessionID]"
+        }
+    ]
+}
