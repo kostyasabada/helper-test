@@ -1,3 +1,22 @@
 {
-  "dd": "dd"
+  "signingAuthorityAuthURL": "https://services-int.athlon.com/api/informa/signing-authority",
+  "integratorUrl": "https://test-integrator.formsengine.io/mit/trainman/tdGfBWvqdSC3en7S/SMEO",
+  "milesPassword": "zDF.LpgP%a",
+  "foConnectorUrl": "https://smeo-fo-connector.tst-docker.mycubes.nl/api/task",
+  "portalAuthorization": "Basic c21lby11c2VyOnNtZW8tdXNlcg==",
+  "startFOReIndexationUrl": "https://api-mock-service.tst-docker.mycubes.nl/api/mock-api/rest/SMEO",
+  "generateMasterleaseUrl": "https://api-edc-int.corpinter.net/milesapi/v1/getreport",
+  "generateSEPAUrl": "https://api-edc-int.corpinter.net/milesapi/v1/getreport",
+  "authorization": "Basic U01FT1BvcnRhbDpTTUVPUG9ydGFs==",
+  "environment": "MC",
+  "signicatUrl": "https://api-mock-service.tst-docker.mycubes.nl/api/mock-api/rest/SMEO",
+  "generateDocumentXApiKey": "f0f02a1c-8da3-4e28-bf54-214625af1c58",
+  "portalUrl": "https://smeo-portal.tst-docker.mycubes.nl",
+  "eSawEndpoint": "https://api-mock-service.tst-docker.mycubes.nl/api/mock-api/rest/SMEO",
+  "camundaEndpoint": "https://smeo-camunda.tst-docker.mycubes.nl/engine-rest",
+  "generateContractUrl": "https://api-mock-service.tst-docker.mycubes.nl/api/mock-api/rest/SMEO/create-contract",
+  "ekycUrl": "https://api-mock-service.tst-docker.mycubes.nl/api/mock-api/rest/SMEO",
+  "foConnectorAuth": "Basic dGVzdC1hcGktdXNlcjp0ZXN0LWFwaS11c2VyLXBhc3N3b3Jk",
+  "eloquaUrl": "https://api-mock-service.tst-docker.mycubes.nl/api/mock-api/rest/SMEO",
+  "milesUser": "sme_online_camunda"
 }
