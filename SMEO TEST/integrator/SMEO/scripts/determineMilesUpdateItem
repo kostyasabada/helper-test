@@ -1,0 +1,15 @@
+// Mandatory fields:
+// MWSElements
+// shallow: troe | false
+
+def updateItems = [
+    "document": [
+        "unsigned_contract.pdf": {
+            MWSElement: "MWSByteContent"
+        }   
+    ]    
+    "value": [
+        
+    ]
+
+]
