@@ -1,0 +1,43 @@
+<#if body.metadata?? && body.metadata.errorinfo?? && body.metadata.errorinfo.message?has_content>
+        {
+            "status": "true",
+            "bpmnError": {
+                "bpmnErrorCode": "MilesCallFailedError",
+                "bpmnErrorMessage": "${body.metadata.errorinfo.message}"
+            }
+        }
+<#elseif body.data?? && body.data.MWSLeaseService??>
+    {
+        "status": "true",
+        "saveToDB": [
+            {
+                "variableName": "investment",
+                "type": "DOUBLE",
+                "value": "${body.data.MWSLeaseService.investment}"
+            }
+        ],
+        "processVariablesTyped" : {
+            "Investment": {
+                "type": "DOUBLE",
+                "value": "${body.data.MWSLeaseService.investment}"
+                
+            }
+        }
+    }
+<#elseif body.QuoteIdWithoutPrefix??>
+    {
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "QuoteId doesn’t exist in Miles anymore. With the quoteid ${body.QuoteIdWithoutPrefix}."
+        }
+    }
+<#else>
+    {
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "QuoteId is missing."
+        }        
+    }
+</#if>
