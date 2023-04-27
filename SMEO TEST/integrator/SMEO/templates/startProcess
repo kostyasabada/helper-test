@@ -1,0 +1,31 @@
+{
+    "messageName": "StartOrderVehicleProcess",
+    "tenantId": "SMEO",
+    "resultEnabled": true,
+    "processVariables": {
+        "PROCESS-NAMESPACE": {
+            "value": "${body.variables['PROCESS-NAMESPACE']}",
+            "type": "String"
+        },
+        "CompanyName": {
+            "value": "${body.variables.companyData.name}",
+            "type": "String"
+        },
+        "CompanyIdentifier": {
+            "value": "${body.variables.companyData.vatNumber}",
+            "type": "String"
+        },
+        "RequesterName": {
+            "value": "${body.variables.contactData.firstName} ${body.variables.contactData.lastName}",
+            "type": "String"
+        },
+        "RequestedVehicle": {
+            "value": "${body.variables.vehicleData.model} ${body.variables.vehicleData.version}",
+            "type": "String"
+        },
+        "ICMoreAccountID": {
+            "value": "${body.variables.ICMoreAccountID}",
+            "type": "String"
+        }
+    }
+}
