@@ -1,0 +1,22 @@
+<soapenv:Envelope xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/07/secext" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="urn:crmondemand/ws/ecbs/customobject1/" xmlns:quer="urn:/crmondemand/xml/CustomObject1/Query">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1">
+         <wsse:UsernameToken>
+            <wsse:Username>${headers.soapConnectorProperties.icMoreUsername}</wsse:Username>
+            <wsse:Password Type="wsse:PasswordText">${headers.soapConnectorProperties.icMorePassword}</wsse:Password>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cus:CustomObject1QueryPage_Input>
+         <quer:ListOfCustomObject1 pagesize="50" startrownum="0" recordcountneeded="true">
+            <!--Optional:-->
+            <quer:CustomObject1>
+ 			<quer:Name>='${body.variables.QuoteId}'</quer:Name>
+			<quer:OpportunityId />
+			<quer:Id />
+            </quer:CustomObject1>
+         </quer:ListOfCustomObject1>
+      </cus:CustomObject1QueryPage_Input>
+   </soapenv:Body>
+</soapenv:Envelope>
