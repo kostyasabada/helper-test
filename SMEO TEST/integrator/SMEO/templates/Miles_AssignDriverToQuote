@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SofEnvelope>
+    <sessionID>${body.MILES_sessionID}</sessionID>
+    <quoteid>${body.quoteIdWithoutPrefix}</quoteid>
+    <contactid>${body.contactId}</contactid>
+    <vehicle>false</vehicle>
+    <validate>true</validate>
+    <templateid>400026</templateid>
+    <lsproperties>false</lsproperties>
+</SofEnvelope>
