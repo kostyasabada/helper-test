@@ -1,0 +1,302 @@
+[
+  {
+    "pipername": "addNote_piper",
+    "name": "addNote_piper"
+  },
+  {
+    "pipername": "CallEloqua_piper",
+    "name": "CallEloqua_piper"
+  },
+  {
+    "pipername": "CallEloquaDummy_piper",
+    "name": "CallEloquaDummy_piper"
+  },
+  {
+    "pipername": "cancelAssessmentOnICMore_piper",
+    "name": "cancelAssessmentOnICMore_piper"
+  },
+  {
+    "pipername": "cancelEmbeddedEsaw_piper",
+    "name": "cancelEmbeddedEsaw_piper"
+  },
+  {
+    "pipername": "cancelEsawFlow_piper",
+    "name": "cancelEsawFlow_piper"
+  },
+  {
+    "pipername": "checkData_piper",
+    "name": "checkData_piper"
+  },
+  {
+    "pipername": "checkIdentificationManually_piper",
+    "name": "checkIdentificationManually_piper"
+  },
+  {
+    "pipername": "checkProblem_piper",
+    "name": "checkProblem_piper"
+  },
+  {
+    "pipername": "checkSigningStatus_piper",
+    "name": "checkSigningStatus_piper"
+  },
+  {
+    "pipername": "createContract_piper",
+    "name": "createContract_piper"
+  },
+  {
+    "pipername": "createMasterLeaseAgreement_piper",
+    "name": "createMasterLeaseAgreement_piper"
+  },
+  {
+    "pipername": "createSEPAMandate_piper",
+    "name": "createSEPAMandate_piper"
+  },
+  {
+    "pipername": "createVehicleOrder_piper",
+    "name": "createVehicleOrder_piper"
+  },
+  {
+    "pipername": "EKYCCheckStatus_piper",
+    "name": "EKYCCheckStatus_piper"
+  },
+  {
+    "pipername": "GenerateMWSRequestForRateBookQuotes_piper",
+    "name": "GenerateMWSRequestForRateBookQuotes_piper"
+  },
+  {
+    "pipername": "getADUserGroups_piper",
+    "name": "getADUserGroups_piper"
+  },
+  {
+    "pipername": "getADUserInfo_piper",
+    "name": "getADUserInfo_piper"
+  },
+  {
+    "pipername": "getEnvelope_piper",
+    "name": "getEnvelope_piper"
+  },
+  {
+    "pipername": "getEsawDocuments_piper",
+    "name": "getEsawDocuments_piper"
+  },
+  {
+    "pipername": "getFOTask_piper",
+    "name": "getFOTask_piper"
+  },
+  {
+    "pipername": "getOpportunityDetailsFromICMore_piper",
+    "name": "getOpportunityDetailsFromICMore_piper"
+  },
+  {
+    "pipername": "getSMEOAssessmentDataFromICMore_piper",
+    "name": "getSMEOAssessmentDataFromICMore_piper"
+  },
+  {
+    "pipername": "getTasksGroups_piper",
+    "name": "getTasksGroups_piper"
+  },
+  {
+    "pipername": "handleEsawFlow_piper",
+    "name": "handleEsawFlow_piper"
+  },
+  {
+    "pipername": "manualChangesInMiles_piper",
+    "name": "manualChangesInMiles_piper"
+  },
+  {
+    "pipername": "Miles_AssignAccountManagerToCustomer_piper",
+    "name": "Miles_AssignAccountManagerToCustomer_piper"
+  },
+  {
+    "pipername": "Miles_AssignAccountManagerToCustomerWithSessionId_piper",
+    "name": "Miles_AssignAccountManagerToCustomerWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_AssignDriverToQuote_piper",
+    "name": "Miles_AssignDriverToQuote_piper"
+  },
+  {
+    "pipername": "Miles_AssignDriverToQuoteWithSessionId_piper",
+    "name": "Miles_AssignDriverToQuoteWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_ChangeCustomerOnQuote_piper",
+    "name": "Miles_ChangeCustomerOnQuote_piper"
+  },
+  {
+    "pipername": "Miles_ChangeCustomerOnQuoteWithSessionId_piper",
+    "name": "Miles_ChangeCustomerOnQuoteWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_CreateBankAccountOnCustomer_piper",
+    "name": "Miles_CreateBankAccountOnCustomer_piper"
+  },
+  {
+    "pipername": "Miles_CreatePaymentPreferenceOnCustomer_piper",
+    "name": "Miles_CreatePaymentPreferenceOnCustomer_piper"
+  },
+  {
+    "pipername": "Miles_GenerateContractFromQuote_piper",
+    "name": "Miles_GenerateContractFromQuote_piper"
+  },
+  {
+    "pipername": "Miles_GenerateContractFromQuoteWithSessionId_piper",
+    "name": "Miles_GenerateContractFromQuoteWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_GenericAttributeUpdateService_piper",
+    "name": "Miles_GenericAttributeUpdateService_piper"
+  },
+  {
+    "pipername": "Miles_GenericAttributeUpdateServiceWithSessionId_piper",
+    "name": "Miles_GenericAttributeUpdateServiceWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_GetFleetVehicleWithSessionId_piper",
+    "name": "Miles_GetFleetVehicleWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_GetLeaseServiceDetail_piper",
+    "name": "Miles_GetLeaseServiceDetail_piper"
+  },
+  {
+    "pipername": "Miles_GetLeaseServiceDetailWithSessionId_piper",
+    "name": "Miles_GetLeaseServiceDetailWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_GetMWSBankAccountsWithSessionId_piper",
+    "name": "Miles_GetMWSBankAccountsWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_GetMWSPaymentPreferencesWithSessionId_piper",
+    "name": "Miles_GetMWSPaymentPreferencesWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_GetSessionID_piper",
+    "name": "Miles_GetSessionID_piper"
+  },
+  {
+    "pipername": "Miles_LeaseServiceDetail_piper",
+    "name": "Miles_LeaseServiceDetail_piper"
+  },
+  {
+    "pipername": "Miles_OrderMWSLeaseService_piper",
+    "name": "Miles_OrderMWSLeaseService_piper"
+  },
+  {
+    "pipername": "Miles_OrderMWSLeaseServiceWithSessionId_piper",
+    "name": "Miles_OrderMWSLeaseServiceWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_RemoveSessionID_piper",
+    "name": "Miles_RemoveSessionID_piper"
+  },
+  {
+    "pipername": "Miles_RetrieveMWSBusinessPartnerWithSessionId_piper",
+    "name": "Miles_RetrieveMWSBusinessPartnerWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_SaveMWSBankAccountsWithSessionId_piper",
+    "name": "Miles_SaveMWSBankAccountsWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_SaveMWSBusinessPartner_piper",
+    "name": "Miles_SaveMWSBusinessPartner_piper"
+  },
+  {
+    "pipername": "Miles_SaveMWSBusinessPartnerWithSessionId_piper",
+    "name": "Miles_SaveMWSBusinessPartnerWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_SaveMWSPaymentPreferencesWithSessionId_piper",
+    "name": "Miles_SaveMWSPaymentPreferencesWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_UpdateFleetVehicle_piper",
+    "name": "Miles_UpdateFleetVehicle_piper"
+  },
+  {
+    "pipername": "Miles_UpdateFleetVehicleWithSessionId_piper",
+    "name": "Miles_UpdateFleetVehicleWithSessionId_piper"
+  },
+  {
+    "pipername": "Miles_UploadDocument_piper",
+    "name": "Miles_UploadDocument_piper"
+  },
+  {
+    "pipername": "Miles_UploadDocumentWithSessionId_piper",
+    "name": "Miles_UploadDocumentWithSessionId_piper"
+  },
+  {
+    "pipername": "RetrieveBankAccountDetails_piper",
+    "name": "RetrieveBankAccountDetails_piper"
+  },
+  {
+    "pipername": "retrieveBPIdAndContactIdFromICMore_piper",
+    "name": "retrieveBPIdAndContactIdFromICMore_piper"
+  },
+  {
+    "pipername": "retrieveBPIdFromICMore_piper",
+    "name": "retrieveBPIdFromICMore_piper"
+  },
+  {
+    "pipername": "retrieveICMoreAccountId_piper",
+    "name": "retrieveICMoreAccountId_piper"
+  },
+  {
+    "pipername": "sendEnvelope_piper",
+    "name": "sendEnvelope_piper"
+  },
+  {
+    "pipername": "SEPA_CheckIBANandBIC_piper",
+    "name": "SEPA_CheckIBANandBIC_piper"
+  },
+  {
+    "pipername": "sepaMandate_piper",
+    "name": "sepaMandate_piper"
+  },
+  {
+    "pipername": "startCancelEvenRijdenSubprocess_piper",
+    "name": "startCancelEvenRijdenSubprocess_piper"
+  },
+  {
+    "pipername": "startCancelVehicleRequestSubprocess_piper",
+    "name": "startCancelVehicleRequestSubprocess_piper"
+  },
+  {
+    "pipername": "startFOReIndexation_piper",
+    "name": "startFOReIndexation_piper"
+  },
+  {
+    "pipername": "updateAccountICMore_piper",
+    "name": "updateAccountICMore_piper"
+  },
+  {
+    "pipername": "updateOpportunityICMore_piper",
+    "name": "updateOpportunityICMore_piper"
+  },
+  {
+    "pipername": "updateStockReservation_piper",
+    "name": "updateStockReservation_piper"
+  },
+  {
+    "pipername": "VerifyPersonIdentity_piper",
+    "name": "VerifyPersonIdentity_piper"
+  },
+  {
+    "pipername": "VerifyPersonIdentityEvenRijden_piper",
+    "name": "VerifyPersonIdentityEvenRijden_piper"
+  },
+  {
+    "pipername": "verifySigningAuthority_piper",
+    "name": "verifySigningAuthority_piper"
+  },
+  {
+    "pipername": "verifySigningAuthorityManually_piper",
+    "name": "verifySigningAuthorityManually_piper"
+  },
+  {
+    "pipername": "СallEloquaTest_piper",
+    "name": "СallEloquaTest_piper"
+  }
+]
