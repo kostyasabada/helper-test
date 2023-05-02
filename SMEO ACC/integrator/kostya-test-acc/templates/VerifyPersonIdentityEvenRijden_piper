@@ -1,8 +1,0 @@
-{
-    "pipes": [
-        {
-            "type": "transform",
-            "name": "VerifyPersonIdentityEvenRijden_setVariables"
-        }
-    ]
-}

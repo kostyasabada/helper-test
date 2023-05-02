@@ -1,8 +1,0 @@
-{
-    "status": "true",
-    "errorOccured": "true",
-    "bpmnError": {
-        "bpmnErrorCode": "StartFOReIndexationProcessFailure",
-        "bpmnErrorMessage": "The re-indexation process on FO failed"
-    }
-}

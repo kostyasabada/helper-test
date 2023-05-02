@@ -1,7 +1,0 @@
-{   
-    "status": "true",
-    "bpmnError": {
-        "bpmnErrorCode": "MilesCallFailedError",
-        "bpmnErrorMessage": "Error occured getting MWSBankAccounts"
-    }
-}

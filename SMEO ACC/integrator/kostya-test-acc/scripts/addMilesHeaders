@@ -1,6 +1,0 @@
-headers['x-api-key'] = 'f0f02a1c-8da3-4e28-bf54-214625af1c58';
-headers['abbreviation'] = 'es';
-// headers['abbreviation'] = body.variables.abbreviation;
-// headers['MILES_sessionID'] = body.variables.MILES_sessionID;
-// headers.handleSoapExceptionTemplate = 'callMiles_error'; 
-// headers.handleExceptionTemplate = 'callMiles_error';

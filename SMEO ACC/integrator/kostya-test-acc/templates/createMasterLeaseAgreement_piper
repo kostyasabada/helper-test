@@ -1,9 +1,0 @@
-{
-   "pipes":[
-      {
-         "name":"createMasterLeaseAgreement",
-         "type":"action",
-         "script":"headers.handleExceptionTemplate = 'createMasterLeaseAgreement_error'; headers.handleRestExceptionTemplate = 'createMasterLeaseAgreement_error'"
-      }
-   ]
-}

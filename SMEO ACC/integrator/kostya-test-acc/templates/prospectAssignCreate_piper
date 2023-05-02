@@ -1,9 +1,0 @@
-{
-    "pipes": [
-        {
-            "type" : "action",
-            "name" : "prospectAssignCreate",
-            "script" : "headers.taskId = body.answers.taskid.data.answer[0]"
-        }
-    ]
-}
