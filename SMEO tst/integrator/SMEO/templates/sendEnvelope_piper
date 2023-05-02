@@ -1,0 +1,13 @@
+{
+    "pipes": [
+      {
+          "name": "sendEnvelope",
+          "type": "action",
+          "script": "processInstanceId = body.variables.processInstanceId; headers.handleExceptionTemplate =  'sendEnvelope_error'; headers.handleRestExceptionTemplate = 'sendEnvelope_error'"
+      },
+      {
+          "name": "sendEnvelope_setVariables",
+          "type": "transform"
+      }
+    ]
+}
