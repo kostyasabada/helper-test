@@ -1,0 +1,87 @@
+{
+    "mailSubject": null,
+    "mailBody": null,
+    "name": null,
+    "status": "Completed",
+    "sendDate": "2022-06-23T08:57:37.13Z",
+    "signers": [
+        {
+            "signerType": "",
+            "firstName": "Floris",
+            "lastName": "Gremmen",
+            "email": "",
+            "status": "Signed",
+            "recipientType": "Signer",
+            "signedDate": "2022-06-23T08:58:58.83Z",
+            "certName": "",
+            "countryCode": "",
+            "phone": "",
+            "languageCode": "",
+            "personalDocumentNumber": "",
+            "authentication": ""
+        }
+    ],
+    "documents": [
+        {
+            "fileName": "vatNumber_processInstanceId_unsigned_Lease contract.pdf",
+            "docRefNumber": 1,
+            "flowDocumentId": "f8e11d67-9989-48c6-b42b-47d09de56f9e",
+            "logDocumentId": "6424d877-bc09-4f8d-89fd-20e371c2943f",
+            "sspFileId": "",
+            "type": {
+                "name": "",
+                "athlonSignPositionX": 20,
+                "athlonSignPositionY": 90,
+                "customerSignPositionX": 405,
+                "customerSignPositionY": 90,
+                "signPage": 0
+            },
+            "path": "",
+            "bucketKey": "",
+            "bucketName": "",
+            "base64": "",
+            "base64FileName": ""
+        },
+        {
+            "fileName": "vatNumber_processInstanceId_unsigned_Master lease agreement.pdf",
+            "docRefNumber": 2,
+            "flowDocumentId": "11c4af32-6d07-4e26-96c3-3831e9426263",
+            "logDocumentId": "00618638-7c22-4179-b741-e81ed9442952",
+            "sspFileId": "",
+            "type": {
+                "name": "",
+                "athlonSignPositionX": 20,
+                "athlonSignPositionY": 90,
+                "customerSignPositionX": 405,
+                "customerSignPositionY": 90,
+                "signPage": 0
+            },
+            "path": "",
+            "bucketKey": "",
+            "bucketName": "",
+            "base64": "",
+            "base64FileName": ""
+        }
+        <#--,
+        {
+            "fileName": "vatNumber_processInstanceId_unsigned_Sepa mandate.pdf",
+            "docRefNumber": 3,
+            "flowDocumentId": "21c4af32-6d07-4e26-96c3-3831e9426263",
+            "logDocumentId": "20618638-7c22-4179-b741-e81ed9442952",
+            "sspFileId": "",
+            "type": {
+                "name": "",
+                "athlonSignPositionX": 20,
+                "athlonSignPositionY": 90,
+                "customerSignPositionX": 405,
+                "customerSignPositionY": 90,
+                "signPage": 0
+            },
+            "path": "",
+            "bucketKey": "",
+            "bucketName": "",
+            "base64": "",
+            "base64FileName": ""
+        } -->
+    ]
+}

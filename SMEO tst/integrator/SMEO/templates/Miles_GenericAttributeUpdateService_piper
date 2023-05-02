@@ -1,0 +1,28 @@
+{
+    "pipes": [
+        <#if body.variables.contractId??>
+            {
+                "name": "Miles_GetSessionID_piper",
+                "type": "action",
+                "script": "QuoteIdWithoutPrefix = body.variables.QuoteIdWithoutPrefix; contractId = body.variables.contractId;"
+            },
+            {
+                "name": "Miles_GenericAttributeUpdateServiceWithSessionId_piper",
+                "type": "action",
+                "script": "body = body; MILES_sessionID = body.MILES_sessionID; body.QuoteIdWithoutPrefix = QuoteIdWithoutPrefix; body.contractId = contractId"
+            },
+    
+            {
+                "type": "action",
+                "name": "Miles_RemoveSessionID_piper",
+                "script" : "body = [objectToReturn: body, MILES_sessionID: MILES_sessionID]"
+            }
+            <#else>
+            {
+                "type": "transform",
+                "name": "Miles_GenericAttributeUpdateService_result"
+            }
+            </#if>
+        
+    ]
+}

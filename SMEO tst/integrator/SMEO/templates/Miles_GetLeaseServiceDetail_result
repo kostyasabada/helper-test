@@ -1,0 +1,23 @@
+ <#if body.metadata?? && body.metadata.errorinfo?? && body.metadata.errorinfo.message?has_content>
+    {
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "${body.metadata.errorinfo.message}"
+        }
+    }
+<#elseif body.data?? && body.data.MWSLeaseService??>
+{
+    "status": "true",
+    "data": <@printObjectToJson source=body.data />,
+    "metadata": <@printObjectToJson source=body.metadata />
+}
+<#else>
+    {   
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "GetLeaseServiceDetail error"
+        }
+    }
+</#if>

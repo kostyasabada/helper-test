@@ -1,0 +1,16 @@
+{
+    "pipes": [
+        <#if body.errorOccured?? || !headers.opportunityId??>
+        {
+            "type": "script",
+            "name": "returnBody"
+        }
+        <#else>
+        {
+            "type": "action",
+            "name": "getOpportunityDetailsFromICMore",
+            "script": "headers.handleSoapExceptionTemplate = 'callICMore_error'; headers.handleExceptionTemplate = 'callICMore_error'"
+        }
+        </#if>
+    ]
+}

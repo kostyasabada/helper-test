@@ -1,0 +1,24 @@
+{
+    "pipes": [
+        <#if body.bpmnError??>
+            {
+                "type": "transform",
+                "name": "transformObjectToJson"
+            }
+        <#else>
+            {
+                "name": "addMilesHeaders",
+                "type": "script"
+            },
+            {
+                "type": "action",
+                "name": "Miles_GenerateContractFromQuote",
+                "script": "headers.handleSoapExceptionTemplate = 'Miles_GenerateContractFromQuote_error'; headers.handleExceptionTemplate = 'Miles_GenerateContractFromQuote_error'"
+            },
+            {
+                "type": "transform",
+                "name": "Miles_GenerateContractFromQuote_result"
+            }
+        </#if>
+    ]
+}

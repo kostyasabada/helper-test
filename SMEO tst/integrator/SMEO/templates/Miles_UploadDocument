@@ -1,0 +1,74 @@
+<#if body.bpmnError??>
+    <@printObjectToJson source=body />
+<#else>
+    <#assign businessPartnerId = body.variables.businessPartnerId! />
+    <#assign paymentPreferenceId = body.variables.paymentPreferenceId! />
+    <#if headers.restConnectorProperties.environment != "DHC">
+        <#assign businessPartnerId = "502369"/>
+        <#assign paymentPreferenceId = "502369"/>
+    </#if>
+
+	<#--
+	| typeof document            | ObjectId                    | templateId
+	| ---------------            | --------                    | ----------
+	| signed_contract            | contractId                  | 425170
+	| signed_master_agreement    | businessPartnerId           | 425174
+	| signed_SDD_mandate         | paymentPreferenceId         | 425183
+	| log_files                  | contractId                  | 425180
+	| eSAW_log_sepa              | paymentPreferenceId         | 425181
+	-->
+	<#switch body.documentType>
+	<#case "signed_lease_contract.pdf">
+	    <#assign objectId = body.variables.contractId/>
+	    <#assign templateId = "425170"/>
+	    <#assign fileName = "signed_lease_contract.pdf"/>
+	    <#break>
+	<#case "signed_master_lease_agreement.pdf">
+	    <#assign objectId = businessPartnerId/>
+	    <#assign templateId = "425174"/>
+	    <#assign fileName = "signed_master_lease_agreement.pdf"/>
+	    <#break>
+	<#case "lease_contract_log_file.pdf">
+	    <#assign objectId = body.variables.contractId/>
+	    <#assign templateId = "425180"/>
+	    <#assign fileName = "contract_log_file.pdf"/>
+	    <#break>
+	<#case "master_lease_agreement_log_file.pdf">
+	    <#assign objectId = businessPartnerId/>
+	    <#assign templateId = "425174"/>
+	    <#assign fileName = "master_lease_agreement_log_file.pdf"/>
+	    <#break>
+	<#case "signed_sepa_mandate.pdf">
+	    <#assign objectId = paymentPreferenceId/>
+	    <#assign templateId = "425186"/>
+	    <#assign fileName = "signed_SDD_mandate.pdf"/>
+	    <#break>
+	<#case "sepa_mandate_log_file.pdf">
+	    <#assign objectId = paymentPreferenceId/>
+	    <#assign templateId = "425187"/>
+	    <#assign fileName = "eSAW_log_sepa.pdf"/>
+	    <#break>
+	<#default>
+	    <#-- help! don't know what to do, so will force an error-->
+	    <#assign objectId = 0/>
+	    <#assign templateId = 0/>
+	    <#assign fileName = ""/>
+	    <#break>
+	</#switch>
+	
+	<?xml version="1.0" encoding="utf-8"?>
+	<SofEnvelope>
+	  <objectid>${objectId}</objectid>
+	  <documenttemplateid>${templateId}</documenttemplateid>
+	  <doclanguageid>4</doclanguageid>
+	  <sessionID>${body.MILES_sessionID}</sessionID>
+	  <data>
+	    <MWSByteContent>
+	      <fileName>${fileName}</fileName>
+	      <fileExt>.pdf</fileExt>
+	      <mimeType>application/pdf</mimeType>
+	      <content>${body.fileContent}</content>
+	    </MWSByteContent>
+	  </data>
+	</SofEnvelope>
+</#if>

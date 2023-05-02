@@ -1,0 +1,11 @@
+<#if body.metadata?? && body.metadata.errorinfo?? && body.metadata.errorinfo.message?has_content>
+    {
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "${body.metadata.errorinfo.message}"
+        }
+    }
+<#else>
+    { "status": "true" }
+</#if>

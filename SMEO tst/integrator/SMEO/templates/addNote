@@ -1,0 +1,12 @@
+<#assign aDateTime = .now>
+
+{
+    "processInstanceId": "${body.answers.processinstanceid.data.answer[0]}",
+    "saveToDB": [
+        {
+            "variableName": "note_${aDateTime?long?c}",
+            "type": "TEXT",
+            "value": "{\"text\":\"${body.answers.message_text.data.answer[0]?json_string}\",\"author\":\"${body.secureData.user.profile.firstName} ${body.secureData.user.profile.lastName}\",\"datetime\":\"${aDateTime?iso_utc}\"}"
+        }
+    ]
+}
