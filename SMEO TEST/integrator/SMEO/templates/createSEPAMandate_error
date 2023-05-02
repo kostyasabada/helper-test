@@ -1,8 +1,0 @@
-{   
-    "status": "true",
-    "errorOccured": "true",
-    "bpmnError": {
-        "bpmnErrorCode": "CreateSEPAMandateError",
-        "bpmnErrorMessage": "<#if body.messsage?? && body.message?has_content>${body.message}<#else>Generate SEPA Mandate call failed</#if>"
-    }
-}

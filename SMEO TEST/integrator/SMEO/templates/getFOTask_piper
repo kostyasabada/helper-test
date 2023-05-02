@@ -1,9 +1,0 @@
-{
-    "pipes": [
-        {
-            "type": "action",
-            "name": "getFOTask",
-            "script": "headers.processId = body.variables.processInstanceId"
-        }
-    ]
-}
