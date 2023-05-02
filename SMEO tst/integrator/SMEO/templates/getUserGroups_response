@@ -1,0 +1,106 @@
+<#if headers.restConnectorProperties.environment == "false">
+<#assign groupList>
+  <#list body.groups as group>
+      "${group.name?json_string}"<#sep>,
+  </#list>
+  </#assign>
+   {
+        "groups": [${groupList}]
+    }
+
+<#else>
+<#assign groupsMap = {
+    "HUNTERM": [
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-User",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Ops",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Sales"
+    ],
+    "FLOYDP": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"],
+    "VANDIJR": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User", "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin", "E501_UR-501-CSDMO-CRA-INT-NL-INT-Ops", "E501_UR-501-CSDMO-CRA-INT-NL-INT-Sales"],
+    "FGREMME": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User", "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"],
+    "DTRABEL": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User", "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"],
+    "RUSIMON": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User", "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"],
+    "ROGERW": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"],
+    "DAVIDG": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "YIALOLU": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User", "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"],
+    "ANAPOSA": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "CBENAIG": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "ELCALVO": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "QUESADA": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User", "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"],
+    "LLOPEZR": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "SUMIVEN": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "VJAYAR": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "ARVJAYA": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User", "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"],
+    "SONENEM": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "ARJUVIJ": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "ANGGAR": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "MARCCRI": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "FLQUAGL": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "FERNSE": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "NFROWIJ": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "JBUGTER": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "RUSIMON": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User"],
+    "GARERIC": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-User", "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"],
+    "OPS": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-Ops"],
+    "SALES": ["E501_UR-501-CSDMO-CRA-INT-NL-INT-Sales"],
+    "KHARECI": [
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-User",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Ops",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Sales"
+    ],
+    "KSABADA": [
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-User",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Ops",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Sales"
+    ],
+    "DKHOMYS": [
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-User",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Ops",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Sales"
+    ],
+    "YSHCHUR": [
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-User",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Ops",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Sales"
+    ],
+    "HENFERN": [
+    	"E501_UR-501-CSDMO-CRA-INT-NL-INT-User"
+    ],
+    "LWESTLA": [
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-User",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"
+    ],
+    "ADESMED": [
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-User",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"
+    ],
+    "IPATSAL": [
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-User",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"
+    ],
+    "REHAJIC": [
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-User",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"
+    ],
+    "IPATSAL": [
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-User",
+        "E501_UR-501-CSDMO-CRA-INT-NL-INT-Admin"
+    ]
+}>
+
+ <#assign username = headers.gasId>
+ 
+  <#list groupsMap as user, groups>
+    <#if user == username>
+    {
+        "groups": <@printObjectToJson source=groups />
+    }
+    </#if>
+   </#list>
+  
+</#if>
