@@ -1,9 +1,0 @@
-{
-    "pipes": [
-        {
-            "type" : "action",
-            "name" : "createContract",
-            "script" : "headers.handleExceptionTemplate =  'createContract_error'; headers.handleRestExceptionTemplate = 'createContract_error'"
-        }
-    ]
-}

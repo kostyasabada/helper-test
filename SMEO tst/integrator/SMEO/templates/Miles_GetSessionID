@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<SofEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <identification>${headers.soapConnectorProperties.milesUser}</identification>
-    <password>${headers.soapConnectorProperties.milesPassword}</password>
-    <action>Logon</action>
-</SofEnvelope>

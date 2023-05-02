@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<SofEnvelope>
-    <quoteid>${body.QuoteIdWithoutPrefix}</quoteid>
-    <sessionID>${body.MILES_sessionID}</sessionID>
-</SofEnvelope>
