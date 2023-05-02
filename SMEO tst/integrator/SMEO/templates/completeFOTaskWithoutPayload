@@ -1,0 +1,4 @@
+{
+    "camundaId": "${body.variables.processInstanceId}",
+    "taskName": "${body.variables.taskName}"
+}
