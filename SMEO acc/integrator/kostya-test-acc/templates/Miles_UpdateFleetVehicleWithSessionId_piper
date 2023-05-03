@@ -1,0 +1,24 @@
+{
+    "pipes": [
+        <#if body.bpmnError??>
+            {
+                "type": "transform",
+                "name": "transformObjectToJson"
+            }
+        <#else>
+            {
+                "name": "addMilesHeaders",
+                "type": "script"
+            },
+            {
+                "type": "action",
+                "name": "Miles_UpdateFleetVehicle",
+                "script": "fleetVehicleStatus = body.fleetVehicleStatus; fleetVehicleId = body.fleetVehicleId; headers.handleSoapExceptionTemplate = 'Miles_UpdateFleetVehicle_error'; headers.handleExceptionTemplate = 'Miles_UpdateFleetVehicle_error';"
+            },
+            {
+                "type": "transform",
+                "name": "Miles_UpdateFleetVehicle_result"
+            }
+        </#if>
+    ]
+}

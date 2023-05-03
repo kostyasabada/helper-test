@@ -1,0 +1,15 @@
+<#if headers.restConnectorProperties.environment == "DHC">
+{<@XMLToJSONAttributes body/>}
+<#else>
+{
+  "data": "",
+  "metadata": {
+    "operationstatus": {
+      "__text": "",
+      "_technicalerror": "false",
+      "_calculationerror": "false",
+      "_businesserror": "false"
+    }
+  }
+}
+</#if>

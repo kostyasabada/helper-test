@@ -1,0 +1,8 @@
+{
+    "pipes": [
+        {
+            "name": "VerifyPersonIdentity_setVariables",
+            "type": "transform"
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+<#if body.errorOccured??>
+    <@printObjectToJson source=body /> 
+<#else>
+<#assign firstName = "" />
+<#assign lastName = "" />
+<#assign personalIdentificationNumber = "" />
+<#if body.finalResult?? && body.finalResult?has_content>
+    <#assign firstName = body.finalResult.firstName />
+    <#assign lastName = body.finalResult.lastName />
+    <#assign personalIdentificationNumber = body.finalResult.personalIdentificationNumber />
+<#elseif body.providerSpecific?? && body.providerSpecific?has_content && body.providerSpecific.ocr?? && body.providerSpecific.ocr?has_content>
+    <#assign firstName = body.providerSpecific.ocr.firstName />
+    <#assign lastName = body.providerSpecific.ocr.lastName />
+    <#assign personalIdentificationNumber = body.providerSpecific.ocr.socialSecurityNumber />
+</#if>
+{
+   "status": "true",
+   "processVariables":{
+      "SignicatIdCheckStatus": "${body.status}",
+      "SignicatFirstName": "${firstName}",
+      "SignicatLastName": "${lastName}",
+      "SignicatPersonalIdentificationNumber": "${personalIdentificationNumber}"
+   },
+   "processVariablesTyped": {
+      "SignicatIdCheck": {
+          "value": "<@printObjectToJsonString source=body />",
+          "type": "JSON"
+      }
+   },
+   "saveToDB":[
+      {
+         "variableName":"SignicatIdCheck",
+         "type":"JSON",
+         "value":"<@printObjectToJsonString source=body />"
+      },
+      {
+         "variableName":"signicatFirstName",
+         "type":"STRING",
+         "value":"${firstName}"
+      },
+      {
+         "variableName":"signicatLastName",
+         "type":"STRING",
+         "value":"${lastName}"
+      },
+      {
+         "variableName":"signicatPersonalIdentificationNumber",
+         "type":"STRING",
+         "value":"${personalIdentificationNumber}"
+      }
+   ]
+}
+</#if>

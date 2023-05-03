@@ -1,0 +1,11 @@
+{
+    "modifications": {
+    <#list body.variablesToSet as name, value>
+        "${name}" : {
+            "value": "${value}",
+            "type": "${body.types['${name}']}"
+        }
+        <#sep>,</#sep>
+    </#list>    
+    }
+}

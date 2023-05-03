@@ -1,0 +1,19 @@
+{
+   "taskId":"${body.answers.taskid.data.answer[0]}",
+   "processInstanceId":"${body.answers.processinstanceid.data.answer[0]}",
+   "processVariables":{
+      "retry":{
+         "value":"${body.answers.retry.data.answerLabel[0]?capitalize}",
+         "type":"String"
+      }
+   }
+   <#if body.answers.argumentation?? && body.answers.argumentation.data.answer[0]?has_content>
+       ,"saveToDB": [
+            {
+                "variableName": "note_${.now?long?c}",
+                "type": "TEXT",
+                "value": "{\"text\":\"${body.answers.argumentation.data.answer[0]?json_string}\",\"author\":\"${body.secureData.user.profile.firstName} ${body.secureData.user.profile.lastName}\",\"datetime\":\"${.now?iso_utc}\"}"
+            }
+        ]
+    </#if>
+}
