@@ -1,0 +1,23 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/07/secext"
+  xmlns:opp="urn:crmondemand/ws/ecbs/opportunity/"
+  xmlns:data="urn:/crmondemand/xml/Opportunity/Data">
+  <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1">
+         <wsse:UsernameToken>
+            <wsse:Username>${headers.soapConnectorProperties.icMoreUsername}</wsse:Username>
+            <wsse:Password Type="wsse:PasswordText">${headers.soapConnectorProperties.icMorePassword}</wsse:Password>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+  <soapenv:Body>
+    <opp:OpportunityUpdate_Input>
+      <data:ListOfOpportunity lastpage="1" recordcount="1">
+        <data:Opportunity operation="OpportunityUpdate">
+          <data:Id>${body.variables.OpportunityId}</data:Id>
+          <data:SalesStage>${body.variables.SalesStage}</data:SalesStage>
+        </data:Opportunity>
+      </data:ListOfOpportunity>
+    </opp:OpportunityUpdate_Input>
+  </soapenv:Body>
+</soapenv:Envelope>
