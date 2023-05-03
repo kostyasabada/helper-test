@@ -1,0 +1,19 @@
+ <#if body.metadata?? && body.metadata.errorinfo?? && body.metadata.errorinfo.message?has_content>
+    {
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "${body.metadata.errorinfo.message}"
+        }
+    }
+<#elseif body.data?? && body.data.MWSBankAccount_Set??>
+    <@printObjectToJson source=body />
+<#else>
+    {   
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "GetMWSBankAccountsForPartners error"
+        }
+    }
+</#if>

@@ -1,0 +1,59 @@
+{
+    "header": {
+        "userName": "${headers.restConnectorProperties.milesUser}",
+        "password": "${headers.restConnectorProperties.milesPassword}",
+        "Country": "${body.countryCode?lower_case}",
+        "report": 2,
+        "status": "",
+        "message": ""
+    },
+    "body": {
+        "data": {
+            "root": {
+                "Masteragreement": {
+                    "CUSTOMER_ID": 510702,
+                    "CUSTOMER_REF": "[* Customer Ref]",
+                    "TRADINGNAME": "${body.companyName}",
+                    "ADDRESSLINE3": "${body.companyPostalCode!} ${body.companyCity!}",
+                    "STATE": "${body.companyState}",
+                    "ADDRESSLINE1": "${body.companyStreet!}<#if body.companyHouseNumber?has_content> ${body.companyHouseNumber}</#if>",
+                    "VATNUMBER": "${body.vatNumber}",
+                    "PC_FULLNAME": "${body.companyName}",
+                    "PC_MAIL": "<#if body.emailAddress?? && body.emailAddress?has_content>${body.emailAddress}<#else> </#if>",
+                    "PC_SEX": 1,
+                    "LEGAL_REPL_FULLNAME": "${body.firstName} ${body.lastName}",
+                    "LEGAL_REPL_PHONENR": "<#if body.telephoneNumber?? && body.telephoneNumber?has_content>${body.telephoneNumber}<#else></#if>",
+                    "LEGAL_REP2_FULLNAME": "[* Name Legal_Rep2]",
+                    "LEGAL_REP2_NIF": "[Personal NIF Legal_Rep2]",
+                    "LEGAL_REP2_PHONENR": "[* Phonenumber Legal_Rep2]",
+                    "AUT_REPL_FULLNAME": "José Pascual Gorne",
+                    "AUT_REPL_NIF": "40654181W",
+                    "AUT_REPL_JOBTITLE": "[* Job title Aut_Repl]",
+                    "AUT_REPL_SEX": 1,
+                    "AUT_REP2_FULLNAME": "[* Name Aut_Rep2]",
+                    "AUT_REP2_NIF": "[* Personal NIF Legal_Rep2]",
+                    "AUT_REP2_JOBTITLE": "[* Job title Aut_Rep2]",
+                    "AUT_REP2_SEX": 1,
+                    "GUARANTOR_NAME": "[* Name guarantor]",
+                    "LESSOR_DIRECTOR_NAME": "Eric Garcia-Portillo Rodriguez",
+                    "LESSOR_DIRECTOR_REGISTRATION": "32156789Z",
+                    "LEASINGCOMPANY_ID": 400003,
+                    "LEASINGCOMPANY_NAME": "Athlon Car Lease Spain, S.A.",
+                    "LEASINGCOMPANY_FORMADDRESS": "Avenida de Bruselas 30\r\n28108 Alcobendas\r\nMadrid Spain",
+                    "LEASINGCOMPANY_ADDRESSLINE1": "Avenida de Bruselas 30",
+                    "LEASINGCOMPANY_POSTALCODE": "28108",
+                    "LEASINGCOMPANY_CITY": "Alcobendas",
+                    "LEASINGCOMPANY_STATE": "Madrid",
+                    "LEASINGCOMPANY_VATNUMBER": "A62288428",
+                    "LEASINGCOMPANY_TELEPHONE": "+34 902566036",
+                    "LEASINGCOMPANY_FAX": "+34 934776561",
+                    "FLEET_MANAGER_FULLNAME": "[* Name fleet manager]",
+                    "FLEET_MANAGER_EMAIL": "[* Email fleet manager]",
+                    "FLEET_MANAGER_SEX": 1,
+                    "LEGAL_REPL_NIF":"<#if body.socialSecurityNumber?? && body.socialSecurityNumber?has_content>${body.socialSecurityNumber}<#else> </#if>"
+                }
+            },
+        "binary": ""
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "pipes": [
+        <#if body.bpmnError??>
+            {
+                "type": "transform",
+                "name": "transformObjectToJson"
+            }
+        <#else>
+            {
+                "name": "addMilesHeaders",
+                "type": "script"
+            },
+            {
+                "name": "addGeneral_TcAndSegmentAndTotalCarFleetSize",
+                "type": "script"
+            },
+            {
+                "type":"action",
+                "name":"Miles_SaveMWSBusinessPartner",
+                "script":"businessPartnerId = body.businessPartnerId; customerStatus = body.customerStatus; headers.handleSoapExceptionTemplate = 'Miles_SaveMWSBusinessPartner_error'; headers.handleExceptionTemplate = 'Miles_SaveMWSBusinessPartner_error';"
+            },
+            {
+                "type":"transform",
+                "name":"Miles_SaveMWSBusinessPartner_result"
+            }
+        </#if>
+    ]
+}

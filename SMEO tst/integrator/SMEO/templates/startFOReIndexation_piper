@@ -1,0 +1,9 @@
+{
+   "pipes":[
+      {
+         "type":"action",
+         "name":"startFOReIndexationProcess",
+         "script":"headers.handleExceptionTemplate =  'startFOReIndexationProcess_error'; headers.handleRestExceptionTemplate = 'startFOReIndexationProcess_error'"
+      }
+   ]
+}
