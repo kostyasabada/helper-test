@@ -1,0 +1,36 @@
+{
+    "pipes": [
+        {
+            "name": "Miles_GetSessionID_piper",
+            "type": "action",
+            "script": "businessPartnerId = body.variables.businessPartnerId; QuoteId = body.variables.QuoteId; BIC = body.variables.BIC; IBAN = body.variables.IBAN"
+        },
+        {
+            "name": "Miles_GetMWSPaymentPreferencesWithSessionId_piper",
+            "type": "action",
+            "script": "body = body; body.businessPartnerId = businessPartnerId; body.QuoteId = QuoteId; MILES_sessionID = body.MILES_sessionID;"
+        },
+
+        {
+            "name": "Miles_SaveMWSPaymentPreferencesWithSessionId_piper",
+            "type": "action",
+            "script": "body = body; body.businessPartnerId = businessPartnerId; body.MILES_sessionID = MILES_sessionID; body.QuoteId = QuoteId; paymentPreferenceId = body.paymentPreferenceId"
+        },
+
+        {
+            "name": "Miles_GetMWSBankAccountsWithSessionId_piper",
+            "type": "action",
+            "script": "body = body; body.businessPartnerId = businessPartnerId; body.QuoteId = QuoteId; body.MILES_sessionID = MILES_sessionID;"
+        },
+        {
+            "name": "Miles_SaveMWSBankAccountsWithSessionId_piper",
+            "type": "action",
+            "script": "body = body; body.businessPartnerId = businessPartnerId; body.QuoteId = QuoteId; body.MILES_sessionID = MILES_sessionID; body.BIC = BIC; body.IBAN = IBAN;"
+        },
+        {
+            "type": "action",
+            "name": "Miles_RemoveSessionID_piper",
+            "script" : "body = [objectToReturn: body, MILES_sessionID: MILES_sessionID]; body.objectToReturn.processVariables = [ paymentPreferenceId: paymentPreferenceId ]"
+        }
+    ]
+}
