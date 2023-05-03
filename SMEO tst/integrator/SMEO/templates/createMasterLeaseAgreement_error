@@ -1,8 +1,0 @@
-{   
-    "status": "true",
-    "errorOccured": "true",
-    "bpmnError": {
-        "bpmnErrorCode": "CreateMasterLeaseAgreementError",
-        "bpmnErrorMessage": "<#if body.messsage?? && body.message?has_content>${body.message}<#else>Generate master lease agreement call failed</#if>"
-    }
-}
