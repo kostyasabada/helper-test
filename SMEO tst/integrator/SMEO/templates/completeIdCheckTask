@@ -1,0 +1,148 @@
+{
+    "processId": "${body.variables.processInstanceId}",
+    "taskName": "VerifyPersonIdentity",
+    "provider": "eid",
+    "status": "${body.variables.status}",
+    "processType": "substantial",
+    "redactionRequested": null,
+    "notificationUrl": null,
+    "createdAt": "2022-07-15T08:40:36Z",
+    "updatedAt": "2022-07-15T08:41:19Z",
+    "providerSpecific": {
+        "ocr": {
+            "lastName": "KASYANOV",
+            "dateOfExpiry": "2026-04-30",
+            "healthNumber": null,
+            "gender": "M",
+            "documentType": "residencePermit",
+            "socialSecurityNumber": null,
+            "documentNumber": "VP6D93JJ9",
+            "taxNumber": null,
+            "dateOfBirth": "1994-06-22",
+            "similarityScore": "high",
+            "firstName": "MAXIM SERGEYEVICH",
+            "nationality": "KAZ",
+            "issuingCountry": "NLD",
+            "securityChecks": {
+                "nonExpired": {
+                    "valid": true
+                },
+                "notUnderage": {
+                    "valid": true
+                },
+                "dataIntegrity": {
+                    "valid": true
+                },
+                "livenessDetected": {
+                    "valid": true
+                },
+                "notFaceSpoofing": {
+                    "valid": true
+                },
+                "sidesMatch": {
+                    "valid": true
+                },
+                "notBWCopy": {
+                    "valid": true
+                }
+            },
+            "features": [
+                {
+                    "name": "Header",
+                    "found": true,
+                    "bbox": {
+                        "x": 204,
+                        "y": 12,
+                        "width": 176,
+                        "height": 24
+                    },
+                    "side": "Front"
+                },
+                {
+                    "name": "Signature",
+                    "found": true,
+                    "bbox": {
+                        "x": 262,
+                        "y": 301,
+                        "width": 138,
+                        "height": 64
+                    },
+                    "side": "Front"
+                },
+                {
+                    "name": "Initials",
+                    "found": true,
+                    "bbox": {
+                        "x": 28,
+                        "y": 20,
+                        "width": 80,
+                        "height": 32
+                    },
+                    "side": "Front"
+                },
+                {
+                    "name": "Photo",
+                    "found": true,
+                    "bbox": {
+                        "x": 70,
+                        "y": 156,
+                        "width": 136,
+                        "height": 165
+                    },
+                    "side": "Front"
+                },
+                {
+                    "name": "OVI",
+                    "found": true,
+                    "bbox": {
+                        "x": 108,
+                        "y": 28,
+                        "width": 56,
+                        "height": 32
+                    },
+                    "side": "Front"
+                }
+            ]
+        },
+        "manualApproval": null,
+        "consolidatedIdentityData": null,
+        "documentContent": null,
+        "iproovSession": null,
+        "userInfo": null,
+        "idToken": null,
+        "error": null,
+        "verification": null,
+        "features": null,
+        "mrz": null,
+        "mrzChecksum": null,
+        "mrzVerification": null,
+        "mrzFeatureMatching": null,
+        "featuresVerification": null,
+        "redactionResult": null,
+        "errors": null,
+        "documentVerification": null,
+        "facialSimilarity": null,
+        "nfc": null,
+        "liveness": null,
+        "matching": null
+    },
+    "finalResult": {
+        "firstName": "MAXIM SERGEYEVICH",
+        "lastName": "KASYANOV",
+        "dateOfExpiry": "2026-04-30",
+        "dateOfBirth": "1994-06-22",
+        "gender": "M",
+        "nationality": "KAZ",
+        "documentType": "residencePermit",
+        "documentNumber": "VP6D93JJ9",
+        "issuingCountry": "NLD",
+        "similarityScore": "high",
+        "personalIdentificationNumber": null,
+        "livenessDetected": true,
+        "placeOfBirth": null,
+        "lastNameSecondLine": null,
+        "dateOfIssue": null
+    },
+    "failReason": null,
+    "depictions": null
+}
