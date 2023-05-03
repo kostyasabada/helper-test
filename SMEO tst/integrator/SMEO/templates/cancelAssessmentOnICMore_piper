@@ -1,0 +1,12 @@
+{
+    "pipes": [
+        {
+            "type": "transform",
+            "name": "icmoreDataToCancelAssessment"   
+        },
+        {
+            "type": "action",
+            "name": "updateAccountICMore"
+        }
+    ]
+}
