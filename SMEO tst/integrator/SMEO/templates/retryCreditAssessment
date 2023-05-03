@@ -1,0 +1,4 @@
+{
+    "messageName": "RetryCreditAssessmentMessage",
+    "processInstanceId": "${body.variables.processInstanceId}"
+}
