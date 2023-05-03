@@ -1,0 +1,22 @@
+{
+    "pipes": [
+        {
+            "type": "action",
+            "name": "getOfferDetailsFromICMore",
+            "script": "quoteId = body.variables.QuoteId; headers.handleSoapExceptionTemplate = 'callICMore_error'; headers.handleExceptionTemplate = 'callICMore_error'"
+        },
+        {
+            "type": "script",
+            "name": "saveOpportunityIdToHeaders"
+        },
+        {
+            "type": "action",
+            "name": "getOpportunityDetailsFromICMore_piper"
+        },
+        {
+            "type": "transform",
+            "name": "retrieveICMoreAccountId_setVariables",
+            "script": "body.opportunityId = headers.opportunityId; headers.quoteId = quoteId"
+        }
+    ]
+}
