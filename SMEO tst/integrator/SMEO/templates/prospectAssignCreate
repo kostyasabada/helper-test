@@ -1,0 +1,61 @@
+<#assign aDateTime = .now>
+
+{
+    "taskId": "${body.answers.taskid.data.answer[0]}",
+    "processInstanceId": "${body.answers.processinstanceid.data.answer[0]}",
+    "processVariables": {
+        "prospectPromotedToCustomer": {
+            "value": "${body.answers.prospect_promoted_to_customer.data.answer[0]}",
+            "type": "String"
+        },
+        "contactCreated": {
+            "value": "${body.answers.contract_created.data.answer[0]}",
+            "type": "String"
+        },
+        "stockVehicleAssignedToCustomer": {
+            "value": "${body.answers.stock_vehicle_assigned_to_customer.data.answer[0]}",
+            "type": "String"
+        }
+        <#if body.answers.prospect_promoted_to_customer.data.answer[0] == "no" || 
+             body.answers.contract_created.data.answer[0] == "no" ||
+             body.answers.stock_vehicle_assigned_to_customer.data.answer[0] == "no"
+        >
+        ,"isAllowed": {
+            "value": "false",
+            "type": "String"
+        }
+        <#else>
+        ,"isAllowed": {
+            "value": "true",
+            "type": "String"
+        }
+        </#if>
+    },
+    "saveToDB": [
+        {
+            "variableName": "prospectAssignCreateArgumentation",
+            "type": "STRING",
+            "value": "${body.answers.argumentation.data.answer[0]}"
+        },
+        {
+            "variableName": "prospectPromotedToCustomer",
+            "type": "STRING",
+            "value": "${body.answers.prospect_promoted_to_customer.data.answer[0]}"
+        },
+        {
+            "variableName": "contactCreated",
+            "type": "STRING",
+            "value": "${body.answers.contract_created.data.answer[0]}"
+        },
+        {
+            "variableName": "stockVehicleAssignedToCustomer",
+            "type": "STRING",
+            "value": "${body.answers.stock_vehicle_assigned_to_customer.data.answer[0]}"
+        },
+        {
+            "variableName": "note_${aDateTime?long?c}",
+            "type": "STRING",
+            "value": "{\"text\":\"${body.answers.argumentation.data.answer[0]?json_string}\",\"formName\":\"Prospect / Assign / Create\",\"author\":\"${body.secureData.user.profile.firstName} ${body.secureData.user.profile.lastName}\",\"datetime\":\"${aDateTime?iso_utc}\"}"
+        }
+    ]
+}
