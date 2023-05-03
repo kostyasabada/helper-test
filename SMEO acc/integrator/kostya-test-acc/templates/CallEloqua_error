@@ -1,7 +1,0 @@
-{   
-    "status": "true",
-    "bpmnError": {
-        "bpmnErrorCode": "EloquaCallFailedError",
-        "bpmnErrorMessage": "Error occured while calling Eloqua"
-    }
-}

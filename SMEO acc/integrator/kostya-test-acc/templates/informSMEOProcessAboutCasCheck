@@ -1,9 +1,0 @@
-<#assign aDateTime = .now>
-{
-    "processInstanceId": "${body.variables.smeoProcessInstanceId}",
-    "processVariables": {
-        "timestamp": "${aDateTime?iso_utc}",
-        "result": "Success",
-        "applicationId": "81841b37-13cf-11ed-a219-04505600b67d"
-    }
-}

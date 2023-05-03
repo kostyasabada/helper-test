@@ -1,7 +1,0 @@
-{   
-    "status": "true",
-    "bpmnError": {
-        "bpmnErrorCode": "MilesUploadFailedError",
-        "bpmnErrorMessage": "File is not uploaded to Miles"
-    }
-}

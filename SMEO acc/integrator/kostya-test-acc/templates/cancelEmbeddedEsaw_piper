@@ -1,9 +1,0 @@
-{
-    "pipes": [
-        {
-            "type": "action",
-            "name": "cancelEsawFlow",
-            "script": "headers.envelopeId = body.variables.EnvelopeId"
-        }
-    ]
-}
