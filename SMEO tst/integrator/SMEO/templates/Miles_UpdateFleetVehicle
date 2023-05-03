@@ -1,0 +1,23 @@
+<#macro checkNode key value>
+    <#switch key>
+        <#case "id"><#t>${body.fleetVehicleId}<#break>
+        <#case "fleetVehicleStatus"><#t>{ "__text": "${body.fleetVehicleStatus}", "_group": "1033", "_id": "${getFleetVehicleStatusId(body.fleetVehicleStatus)}", "_type": "168" }<#break>
+         <#default>
+            <#if value?is_hash>
+                <#t><@printObjectToJson source=value /><#break>
+            <#else>
+                <#t>${value}<#break>
+            </#if>
+    </#switch>
+</#macro>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SofEnvelope>
+    <sessionID>${body.MILES_sessionID}</sessionID>
+    <action>execute</action>
+    <data>
+        <MWSFleetVehicle>
+            <@JSONToXML node=body.data.MWSFleetVehicle shallow=false check=true checkHash=true/>
+        </MWSFleetVehicle>
+    </data>
+</SofEnvelope>
