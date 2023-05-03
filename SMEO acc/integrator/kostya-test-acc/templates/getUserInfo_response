@@ -1,0 +1,230 @@
+<#if headers.restConnectorProperties.environment == "DHC">
+    <#assign firstName = ""/>
+    <#assign lastName = ""/>
+    <#assign email = ""/>
+<#list body.values as value>
+        <#if value.name == 'givenName'>
+         <#assign firstName = value.values[0]/>
+         <#elseif value.name == 'sn'>
+         <#assign lastName = value.values[0]/>
+         <#elseif value.name == 'mail'>
+         <#assign email = value.values[0]/>
+      </#if>
+</#list>
+  {
+    "firstName": "${firstName}",
+    "lastName": "${lastName}",
+    "email": "${email}"
+  }
+<#else>
+  <#assign userInfoMap = {
+    	"HUNTERM": {
+    		"firstName":"Mike",
+    		"lastName":"Hunter",
+    		"email":"brian.schilham@mycubes.nl"
+    	},
+    	"ESSMEO":{
+    	    "firstName": "SME Online",
+    	    "lastName": "Department",
+    	    "email": "test@mycubes.nl"
+    	},
+    	"PTSMEO":{
+    	    "firstName": "SME Online",
+    	    "lastName": "Department",
+    	    "email": "test@mycubes.nl"
+    	},
+    	"FLOYDP": {
+    	    "firstName": "Pink",
+    	    "lastName": "Floyd",
+    	    "email": "test@mycubes.nl"
+    	},
+    	"ROGERW": {
+    	    "firstName": "Roger",
+    	    "lastName": "Waters",
+    	    "email": "test@mycubes.nl"
+    	},
+    	"DAVIDG": {
+    	    "firstName": "David",
+    	    "lastName": "Gilmour",
+    	    "email": "test@mycubes.nl"
+    	},
+    	"VANDIJR": {
+    	    "firstName": "Rutger",
+    	    "lastName": "van Dijk",
+    	    "email": "test@mycubes.nl"
+    	},
+    	"FGREMME": {
+    	    "firstName": "Floris",
+    	    "lastName": "Gremmen",
+    	    "email": "floris.gremmen@athlon.com"
+    	},
+    	"DTRABEL": {
+    	    "firstName": "Dhouha",
+    	    "lastName": "Trabelsi",
+    	    "email": "dhouha.trabelsi@teamwillgroup.com"
+    	},
+    	"RUSIMON": {
+    	    "firstName": "Ruud",
+    	    "lastName": "Simons",
+    	    "email": "ext.ruud.simons@sofico.nl"
+    	},
+    	"YIALOLU": {
+    	    "firstName": "Yiit",
+    	    "lastName": "Aloglu",
+    	    "email": "yigit.aloglu@athlon.com"
+    	},
+    	"ANAPOSA": {
+    	    "firstName": "Annabelle",
+    	    "lastName": "Posada",
+    	    "email": "annabelle.posada@athlon.com"
+    	},
+    	"CBENAIG": {
+    	    "firstName": "Cristina",
+    	    "lastName": "Benaiges",
+    	    "email": "Cristina.Benaiges@athlon.com"
+    	},
+    	"ELCALVO": {
+    	    "firstName": "Elena",
+    	    "lastName": "Calvo",
+    	    "email": "Elena.Calvo@athlon.com"
+    	},
+    	"QUESADA": {
+    	    "firstName": "Daniel",
+    	    "lastName": "Quesada",
+    	    "email": "Daniel.Quesada@athlon.com"
+    	},
+    	"LLOPEZR": {
+    	    "firstName": "Laura",
+    	    "lastName": "López",
+    	    "email": "laura.lopez@athlon.com"
+    	},
+    	"SUMIVEN": {
+    	    "firstName": "Sumithra",
+    	    "lastName": "Venkatappa",
+    	    "email": "sumithra.venkatappa@mercedes-benz.com"
+    	},
+    	"VJAYAR": {
+    	    "firstName": "",
+    	    "lastName": "Jayaram",
+    	    "email": "ibm.i.v@mercedes-benz.com"
+    	},
+    	"ARVJAYA": {
+    	    "firstName": "",
+    	    "lastName": "Jayanthijanani",
+    	    "email": "jayanthijanani.arv@mercedes-benz.com"
+    	},
+    	"SONENEM": {
+    	    "firstName": "Sonesh",
+    	    "lastName": "Nema",
+    	    "email": "sonesh.nema@mercedes-benz.com"
+    	},
+    	"ARJUVIJ": {
+    	    "firstName": "Arjun",
+    	    "lastName": "Vijay",
+    	    "email": "qburst.q.vijay@mercedes-benz.com"
+    	},
+    	"ANGGAR": {
+    	    "firstName": "Ángeles",
+    	    "lastName": "Marcos",
+    	    "email": "Marcos .a.garcia_rubio@mercedes-benz.com"
+    	},
+    	"MARCCRI": {
+    	    "firstName": "Cristina",
+    	    "lastName": "García",
+    	    "email": "cristina.marcos@athlon.com"
+    	},
+    	"FLQUAGL": {
+    	    "firstName": "Flaviano",
+    	    "lastName": "Quaglia",
+    	    "email": "flaviano.quaglia@athlon.com"
+    	},
+    	"FERNSE": {
+    	    "firstName": "Sergio",
+    	    "lastName": "Fernandez",
+    	    "email": "sergio.s.fernandez@athlon.com"
+    	},
+    	"YSHCHUR": {
+    	    "firstName": "Petro",
+    	    "lastName": "Bolbochan",
+    	    "email": "yshchur@mycubes.nl"
+    	},
+    	"NFROWIJ": {
+    	    "firstName": "Niels",
+    	    "lastName": "Frowijn",
+    	    "email": "niels.frowijn@athlon.com"
+    	},
+    	"JBUGTER": {
+    	    "firstName": "Jasper",
+    	    "lastName": "Bugter",
+    	    "email": "jasper.bugter@athlon.com"
+    	},
+    	"RUSIMON": {
+    	    "firstName": "Ruud",
+    	    "lastName": "Simons",
+    	    "email": "ruud.simons@athlon.com"
+    	},
+    	"GARERIC": {
+    	    "firstName": "Eric",
+    	    "lastName": "Garcia Portillo Rodriquez",
+    	    "email": "eric.garcia@athlon.com"
+    	},
+    	"OPS": {
+    	    "firstName": "Ops",
+    	    "lastName": "Ops",
+    	    "email": "ops.com"
+    	},
+    	"SALES": {
+    	    "firstName": "Sales",
+    	    "lastName": "Sales",
+    	    "email": "sales.com"
+    	},
+    	 "KHARECI": {
+    	    "firstName": "IRYNA",
+    	    "lastName": "Sales",
+    	    "email": "sales.com"
+    	},
+        "DKHOMYS": {
+    	    "firstName": "Diana",
+    	    "lastName": "Diana",
+    	    "email": "sales.com"
+    	},
+    	"HENFERN": {
+    	    "firstName": "Henar",
+    	    "lastName": "Fernandez",
+    	    "email": "henar.fernandez@athlon.com"
+    	},
+    	"LWESTLA": {
+    	    "firstName": "Larissa",
+    	    "lastName": "Westland",
+    	    "email": "larissa.westland@athlon.com"
+    	},
+    	"ADESMED": {
+    	    "firstName": "Andy",
+    	    "lastName": "de Smedt",
+    	    "email": "andy.desmedt@athlon.com"
+    	},
+    	"ADESMED": {
+    	    "firstName": "Kostya",
+    	    "lastName": "Sabada",
+    	    "email": "kostya.sabada@athlon.com"
+    	},
+    	"IPATSAL": {
+    	    "firstName": "Ilia",
+    	    "lastName": "Patsali",
+    	    "email": "ilia.patsali@athlon.com"
+    	},
+    	"REHAJIC": {
+    	    "firstName": "Renata",
+    	    "lastName": "Cehajic",
+    	    "email": "renata.cehajic@athlon.com"
+    	}
+    	
+    }/>
+ <#assign username = headers.gasId>
+ 
+   <#list userInfoMap as user, info>
+    <#if user == username>
+      <@printObjectToJson source=info />
+    </#if>
+   </#list>
+ </#if>
