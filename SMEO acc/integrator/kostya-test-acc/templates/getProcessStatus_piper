@@ -1,0 +1,9 @@
+{
+    "pipes": [
+        {
+            "type": "action",
+            "name": "getProcessStatus",
+            "script": "headers.processInstanceId = body.variables.processInstanceId"
+        }
+    ]
+}
