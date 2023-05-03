@@ -1,0 +1,24 @@
+<#assign aDateTime = .now>
+
+{
+    "taskId": "${body.answers.taskid.data.answer[0]}",
+    "processInstanceId": "${body.answers.processinstanceid.data.answer[0]}",
+    "processVariables": {
+        "sepaMandateReceived": {
+            "value": "${body.answers.agree.data.answer[0]}",
+            "type": "String"
+        }
+    },
+    "saveToDB": [
+        {
+            "variableName": "sepaMandateArgumentation",
+            "type": "TEXT",
+            "value": "${body.answers.argumentation.data.answer[0]}"
+        },
+        {
+            "variableName": "note_${aDateTime?long?c}",
+            "type": "TEXT",
+            "value": "{\"text\":\"${body.answers.argumentation.data.answer[0]?json_string}\",\"formName\":\"SEPA Mandate & validate bank account\",\"author\":\"${body.secureData.user.profile.firstName} ${body.secureData.user.profile.lastName}\",\"datetime\":\"${aDateTime?iso_utc}\"}"
+        }
+    ]
+}
