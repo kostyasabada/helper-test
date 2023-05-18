@@ -1,0 +1,41 @@
+{
+    "header": {
+    <#-- take from confluence -->
+        "userName": "${headers.restConnectorProperties.milesUser}",
+        "password": "${headers.restConnectorProperties.milesPassword}",
+        "Country": "${body.countryCode?lower_case}",
+        "report": 3,
+        "status": "",
+        "message": ""
+    },
+    "body": {
+        "data": {
+            "root": {
+                "Sepa": {
+                    "PAYMENTPREFERENCESNUMBER": 510702,
+                    "CREDITOR_NAME": "Athlon Car Lease Spain, S.A.",
+                    "CREDITOR_STREET": "Avenida de Bruselas, 30 ",
+                    "CREDITOR_STREET2": "",
+                    "CREDITOR_POSTAL_CODE": "28108",
+                    "CREDITOR_CITY": "Alcobendas",
+                    "CREDITOR_STATE": "Madrid",
+                    "CREDITOR_COUNTRY": "España",
+                    "CREDITOR_TELEPHONE": "+34 902566032",
+                    "CREDITOR_FAX": "+34 934776561",
+                    "CREDITOR_IDENTIFICATION": "A62288428",
+                    "CREDITOR_VATNUMBER": "A62288428",
+                    "MANDATE_REFERENCE": "${body.quoteIdWithoutPrefix}",
+                    "CUSTOMER_NAME": "${body.companyName}",
+                    "CUSTOMER_STREET": "${body.companyStreet} <#if body.companyHouseNumber?has_content>${body.companyHouseNumber}</#if>",
+                    "CUSTOMER_POSTAL_CODE": "${body.companyPostalCode}",
+                    "CUSTOMER_CITY": "${body.companyCity}",
+                    "CUSTOMER_COUNTRY": "España",
+                    "CUSTOMER_IBAN": "${body.companyIBAN}",
+                    "CUSTOMER_BIC": "${body.companyBIC}",
+                    "ATH_IBAN": "ES3701823994060208000614"
+                }
+            }
+        },
+        "binary": ""
+    }
+}
