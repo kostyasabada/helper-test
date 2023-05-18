@@ -1,0 +1,36 @@
+{
+   "pipes": [
+	<#if body.variables.BankAccountId?? && body.variables.BankAccount??>
+        {
+            "name":"Miles_GetSessionID_piper",
+            "type":"action",
+            "script":"businessPartnerId = body.variables.businessPartnerId; preferenceStatus = body.variables.preferenceStatus; QuoteIdWithoutPrefix = body.variables.QuoteIdWithoutPrefix; bankAccountId = body.variables.BankAccountId; bankAccount = body.variables.BankAccount"
+        },
+        {
+            "name":"Miles_GetMWSPaymentPreferencesWithSessionId_piper",
+            "type":"action",
+            "script":"body = body; body.businessPartnerId = businessPartnerId; body.preferenceStatus = preferenceStatus; body.QuoteIdWithoutPrefix = QuoteIdWithoutPrefix; MILES_sessionID = body.MILES_sessionID;"
+        },
+        {
+            "name":"Miles_SaveMWSPaymentPreferencesWithSessionId_piper",
+            "type":"action",
+            "script": "body = body; body.businessPartnerId = businessPartnerId; body.MILES_sessionID = MILES_sessionID; body.preferenceStatus = preferenceStatus; body.QuoteIdWithoutPrefix = QuoteIdWithoutPrefix; paymentPreferenceIdGet = body.paymentPreferenceId; body.bankAccountId = bankAccountId; body.bankAccount = bankAccount;"
+        },
+        {
+            "name": "Miles_CreatePaymentPreferenceOnCustomer_checkProcessVars",
+            "type": "transform",
+            "script": "body = body; body.paymentPreferenceIdGet = paymentPreferenceIdGet"
+        },
+        {
+            "type":"action",
+            "name":"Miles_RemoveSessionID_piper",
+            "script":"body.MILES_sessionID = MILES_sessionID; body.objectToReturn.processVariables = body.processVariables; body.objectToReturn.saveToDB = body.saveToDB;"
+        }
+	<#else>
+        {
+            "type": "transform",
+            "name": "Miles_CreatePaymentPreferenceOnCustomer_setVariables"
+        }
+    </#if>
+   ]
+}
