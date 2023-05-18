@@ -1,0 +1,65 @@
+def statuses = ['In review', 'In Review', 'New', 'Nuevo'];
+
+if(statuses.any{element -> element == body.data.MWSBusinessPartner.MWSCustomerDetail.customerState.__text})
+{
+    
+    body.data.MWSBusinessPartner.MWSCustomerDetail.MWSDynamicAttribute_Set.MWSDynamicAttribute.each{if(it.sraId == "100006" && it.MWSEnumerationValue.value == ''){
+            it.MWSEnumerationValue = ["value": "600646"]
+    } }
+    
+    body.data.MWSBusinessPartner.MWSCustomerDetail.MWSDynamicAttribute_Set.MWSDynamicAttribute.each{if(it.sraId == "425065" && it.MWSIntegerValue.value == ''){
+            it.MWSIntegerValue = ["value": "1"]
+    } }
+    
+    body.data.MWSBusinessPartner.MWSCustomerDetail.MWSDynamicAttribute_Set.MWSDynamicAttribute.each{if(it.sraId == "425064" && it.MWSEnumerationValue.value == ''){
+            it.MWSEnumerationValue = ["value": "425988"]
+    } }
+
+    
+    
+    def list = [];
+    
+    if(!body.data.MWSBusinessPartner.MWSCustomerDetail.MWSDynamicAttribute_Set.MWSDynamicAttribute.any{element -> element.sraId == "100006"}) {
+        list.addAll(
+            [
+                "sroId": "331",
+                "sraId": "100006",
+                "objectId": body.data.MWSBusinessPartner.MWSCustomerDetail.id,
+                "MWSEnumerationValue": [
+                    "value": "600646"
+                ]
+            ]);
+    };
+    
+    if(!body.data.MWSBusinessPartner.MWSCustomerDetail.MWSDynamicAttribute_Set.MWSDynamicAttribute.any{element -> element.sraId == "425065"}) {
+        list.addAll(
+            [
+                "sroId": "331",
+                "sraId": "425065",
+                "objectId": body.data.MWSBusinessPartner.MWSCustomerDetail.id,
+                "MWSIntegerValue": [
+                    "value": "1"
+                ]
+            ]);
+    };
+    
+    if(!body.data.MWSBusinessPartner.MWSCustomerDetail.MWSDynamicAttribute_Set.MWSDynamicAttribute.any{element -> element.sraId == "425064"}) {
+        list.addAll(
+            [
+                "sroId": "331",
+                "sraId": "425064",
+                "objectId": body.data.MWSBusinessPartner.MWSCustomerDetail.id,
+                "MWSEnumerationValue": [
+                    "value": "425988"
+                ]
+            ]);
+    };
+    
+    body.data.MWSBusinessPartner.MWSCustomerDetail.MWSDynamicAttribute_Set.MWSDynamicAttribute.addAll(list);
+}
+else 
+{
+    body.data.MWSBusinessPartner.MWSCustomerDetail.MWSDynamicAttribute_Set = []
+}
+
+return body;
