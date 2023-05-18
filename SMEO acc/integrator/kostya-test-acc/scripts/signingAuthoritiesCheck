@@ -1,0 +1,17 @@
+def signingAuthorityValidated = "no";
+
+if (body.bpmnError == null) {
+  def firstName = body.firstName.toLowerCase();
+  def lastName = body.lastName.toLowerCase();
+
+  if (body.signingAuthorities != null && body.signingAuthorities.size() == 0) {
+    signingAuthorityValidated = "yes";
+  } else {
+      if (body.signingAuthorities.any { el -> el.lastName.toLowerCase() == lastName && el.firstName.toLowerCase() && el.firstName.toLowerCase() == firstName }) {
+        signingAuthorityValidated = "yes";
+      }
+  }
+
+}
+
+body.signingAuthorityValidated = signingAuthorityValidated;
