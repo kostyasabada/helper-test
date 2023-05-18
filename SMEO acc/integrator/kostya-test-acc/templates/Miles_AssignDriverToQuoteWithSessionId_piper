@@ -1,0 +1,24 @@
+{
+    "pipes": [
+        <#if body.bpmnError??>
+            {
+                "type": "transform",
+                "name": "transformObjectToJson"
+            }
+        <#else>
+            {
+                "name": "addMilesHeaders",
+                "type": "script"
+            },
+            {
+                "type": "action",
+                "name": "Miles_AssignDriverToQuote",
+                "script": "headers.handleSoapExceptionTemplate = 'Miles_error'; headers.handleExceptionTemplate = 'Miles_error'"
+            },
+            {
+                "type": "transform",
+                "name": "Miles_AssignDriverToQuote_result"
+            }
+        </#if>
+    ]
+}
