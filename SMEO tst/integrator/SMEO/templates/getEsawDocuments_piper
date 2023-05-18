@@ -1,0 +1,12 @@
+{
+    "pipes": [
+      {
+          "type": "script",
+          "name": "downloadDocumentsFromESaw"
+      },
+      {
+          "type": "transform",
+          "name": "getEsawDocuments_setVariables"
+      }
+    ]
+}
