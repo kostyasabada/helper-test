@@ -1,0 +1,24 @@
+{
+    "pipes": [
+        {
+            "name": "Miles_GetSessionID_piper",
+            "type": "action",
+            "script": "contactId = body.variables.contactId; QuoteIdWithoutPrefix = body.variables.QuoteIdWithoutPrefix; businessPartnerId = body.variables.businessPartnerId; deliveryCity = body.variables.deliveryCity; deliveryRegion = body.variables.deliveryRegion"
+        },
+        {
+            "name": "Miles_GetLeaseServiceDetailWithSessionId_piper",
+            "type": "action",
+            "script": "body = body; body.QuoteIdWithoutPrefix = QuoteIdWithoutPrefix; MILES_sessionID = body.MILES_sessionID; body.deliveryCity = deliveryCity; body.deliveryRegion = deliveryRegion"
+        },
+        {
+            "name": "Miles_OrderMWSLeaseServiceWithSessionId_piper",
+            "type": "action",
+            "script": "body = body; body.MILES_sessionID = MILES_sessionID; body.QuoteIdWithoutPrefix = QuoteIdWithoutPrefix; body.contactId = contactId; body.businessPartnerId = businessPartnerId; body.deliveryCity = deliveryCity; body.deliveryRegion = deliveryRegion"
+        },
+        {
+            "type": "action",
+            "name": "Miles_RemoveSessionID_piper",
+            "script" : "body = [objectToReturn: body, MILES_sessionID: MILES_sessionID];"
+        }
+    ]
+}
