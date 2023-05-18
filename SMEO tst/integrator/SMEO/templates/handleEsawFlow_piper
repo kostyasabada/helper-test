@@ -1,0 +1,15 @@
+{
+    pipes: [
+    <#if body.variables.documentStatus?? && body.variables.documentStatus.value != "Completed" && body.variables.envelopeId??>
+        {
+            "type": "action",
+            "name": "cancelEsawFlow",
+            "script": "headers.envelopeId = body.variables.envelopeId.value"
+        },
+    </#if>
+        {
+            "type": "action",
+            "name": "handleEsawFlow_result"
+        }
+    ]
+}
