@@ -1,0 +1,17 @@
+{
+    "pipes": [
+        {
+            "name": "addMilesHeaders",
+            "type": "script"
+        },
+        {
+            "name": "Miles_GetSessionID_piper",
+            "type": "action"
+        },
+        {
+            "type": "action",
+            "name": "GenerateMWSRequestForRateBookQuotes",
+            "script" : "body = body;"
+        }
+    ]
+}
