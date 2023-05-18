@@ -1,0 +1,40 @@
+<#if body.errorOccured??>
+    <@printObjectToJson source=body /> 
+<#else>
+{
+    "status": "true",
+    "processVariables": {
+         <#if body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]?? && body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]?has_content>
+                "businessPartnerId": "${body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]}",
+        <#else>
+                "businessPartnerId": "",
+        </#if>
+        
+        <#if body.AccountQueryPage_Output.ListOfAccount.Account.PrimaryContactExternalSystemId?split('_')[1]?? && body.AccountQueryPage_Output.ListOfAccount.Account.PrimaryContactExternalSystemId?split('_')[1]?has_content>
+                "contactId": "${body.AccountQueryPage_Output.ListOfAccount.Account.PrimaryContactExternalSystemId?split('_')[1]}",
+        <#else>
+                "contactId": "",
+        </#if>
+    },
+        "saveToDB": [
+            {
+                "variableName": "businessPartnerId",
+                <#if body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]?? && body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]?has_content>
+                    "value": "${body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]}",
+                <#else>
+                    "value": "",
+                </#if>
+                "type": "STRING"
+            },
+            {
+                "variableName": "contactId",
+                <#if body.AccountQueryPage_Output.ListOfAccount.Account.PrimaryContactExternalSystemId?split('_')[1]?? && body.AccountQueryPage_Output.ListOfAccount.Account.PrimaryContactExternalSystemId?split('_')[1]?has_content>
+                    "value": "${body.AccountQueryPage_Output.ListOfAccount.Account.PrimaryContactExternalSystemId?split('_')[1]}",
+                <#else>
+                    "value": "",
+                </#if>
+                "type": "STRING"
+            }
+        ]
+}
+</#if>
