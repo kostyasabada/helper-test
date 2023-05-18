@@ -1,0 +1,7 @@
+{   
+    "status": "true",
+    "bpmnError": {
+        "bpmnErrorCode": "SigningAuthorityMicroserviceError",
+        "bpmnErrorMessage": "Failed to verify signing authority."
+    }
+}
