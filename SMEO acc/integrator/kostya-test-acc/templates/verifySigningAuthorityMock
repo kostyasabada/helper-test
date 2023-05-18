@@ -1,0 +1,29 @@
+    {   
+        "firstName": "${body.variables.ContactFirstName}",
+        "lastName": "${body.variables.ContactLastName}",
+        "signingAuthorities": [
+            {
+                "lastName": "BODEGAS TERRAS GAUDA SA"
+            },
+            {
+                "firstName": "SANTIAGO",
+                "lastName": "DELGADO ARCE"
+            },
+            {
+                "firstName": "ENRIQUE",
+                "lastName": "COSTAS RODRIGUEZ"
+            },
+            {
+                "firstName": "SANTIAGO",
+                "lastName": "DELGADO ARCE"
+            },
+            {
+                "firstName": "JOSE MARIA",
+                "lastName": "FONSECA MORETON"
+            },
+            {
+                "firstName": "MARIA PAULA",
+                "lastName": "SMITH REINOLDS"
+            }
+        ]
+    }

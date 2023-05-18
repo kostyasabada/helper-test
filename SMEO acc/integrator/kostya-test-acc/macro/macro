@@ -1,3 +1,652 @@
+<#function getTaskDescription body>
+    <#if body.variables.TaskType == "Hitlist_task">
+        <#if body.variables.possibleCustomers?? && body.variables.possibleCustomers?has_content>
+             <#assign description>
+                <#outputformat "HTML">
+                The credit assessment for company ${body.variables.CustomerName?no_esc} is cancelled because the Credit agency could not uniquely identify the company.
+                The following list of identities were found:
+                <#list body.variables.possibleCustomers as possibleCustomer>
+                    Company name: ${possibleCustomer.businessPartner.companyDisclosure.companyName!?no_esc}
+                    Company ID: ${possibleCustomer.businessPartner.companyDisclosure.companyId!}<#rt>
+                    <#if possibleCustomer.businessPartner.companyDisclosure.vatId??>
+                    VAT ID: ${possibleCustomer.businessPartner.companyDisclosure.vatId}<#rt>
+                    </#if>
+                    <#if possibleCustomer.businessPartner.addresses?? && possibleCustomer.businessPartner.addresses?has_content>
+                    Address: <#if possibleCustomer.businessPartner.addresses[0].street?? && possibleCustomer.businessPartner.addresses[0].street?has_content>${possibleCustomer.businessPartner.addresses[0].street}</#if><#if possibleCustomer.businessPartner.addresses[0].number?? && possibleCustomer.businessPartner.addresses[0].number?has_content> ${possibleCustomer.businessPartner.addresses[0].number}</#if><#if possibleCustomer.businessPartner.addresses[0].city?? && possibleCustomer.businessPartner.addresses[0].city?has_content> ${possibleCustomer.businessPartner.addresses[0].city}</#if><#if possibleCustomer.businessPartner.addresses[0].zipCode?? && possibleCustomer.businessPartner.addresses[0].zipCode?has_content>${possibleCustomer.businessPartner.addresses[0].zipCode}</#if><#rt>
+                    </#if>
+                    <#if possibleCustomer.probability??>
+                    Probability: ${possibleCustomer.probability}<#rt>
+                    </#if>
+                </#list>
+                Please update the account in ICMore with the correct information from the list above.
+                After you have made your changes, please restart the Credit assessment.
+                </#outputformat>
+            </#assign>
+        <#else>
+            <#if body.variables.CustomerCountry == "ES">
+                <#assign description>
+                    The credit assessment for company ${body.variables.CustomerName} is cancelled because the Credit agency could not uniquely identify the company.
+                    Please check the correctness of the VAT number on https://www.vat-number-check.com/spain.html.
+                    After you corrected the VAT number for this account in ICMore, please restart the Credit assessment.
+                </#assign>
+            <#elseif body.variables.CustomerCountry == "FR">
+                <#assign description>
+                    The credit assessment for company ${body.variables.CustomerName} is cancelled because the Credit Agency could not uniquely identify the company.
+                    Please check the correctness of the Siren number.
+                    After you corrected the Siren number for this account in iCMore, please restart the Credit assessment.
+                </#assign>
+            <#elseif body.variables.CustomerCountry == "NL">
+                <#assign description>
+                    The credit assessment for company ${body.variables.CustomerName} is cancelled because the Credit Agency could not uniquely identify the company.
+                    Please check the correctness of the Enterprise number.
+                    After you corrected the Enterprise number for this account in iCMore, please restart the Credit assessment.
+                </#assign>
+            <#elseif body.variables.CustomerCountry == "IT">
+                <#assign description>
+                    The credit assessment for company ${body.variables.CustomerName} is cancelled because the Credit Agency could not uniquely identify the company.
+                    Please check the correctness of the VAT number.
+                    After you corrected the VAT number for this account in iCMore, please restart the Credit assessment.
+                </#assign>
+            <#elseif body.variables.CustomerCountry == "DE">
+                <#assign description>
+                    The credit assessment for company ${body.variables.CustomerName} is cancelled because the Credit Agency could not uniquely identify the company.
+                    Please check the correctness of the Enterprise number.
+                    After you corrected the Enterprise number for this account in iCMore, please restart the Credit assessment.
+                </#assign>
+            </#if>
+        </#if>
+    </#if>
+    <#if body.variables.TaskType == "MoreInfo_task"><#assign description>Business Underwriting has requested additional information concerning the following credit line request.
+Account: ${body.variables.ICMoreAccountName}
+Requested credit line: ${body.variables.RequestedCreditLine}
+Request date: ${body.variables.ApplicationEntryDate}
+Request: ${body.variables.QuestionOfUnderwriter}
+Please open the Credit assessment URL and provide the needed information.</#assign></#if>
+    <#return description>
+</#function>
+
+<#function getTaskSubject body>
+    <#assign subject = "NOT_IMPLEMENTED">
+    <#if body.variables.TaskType == "Hitlist_task">
+        <#if body.variables.ICMoreAccountName?? && body.variablesICMoreAccountName?has_content && (body.variables.ICMoreAccountName?length > 83)>
+		    <#assign subject><#outputformat "HTML">Assessment cancelled - Company ${body.variables.ICMoreAccountName[0..82]?no_esc} couldn't be uniquely identified</#outputformat></#assign>
+		<#else>
+		    <#assign subject><#outputformat "HTML">Assessment cancelled - Company ${body.variables.ICMoreAccountName?no_esc} couldn't be uniquely identified</#outputformat></#assign>
+		</#if>
+    </#if>
+    <#if body.variables.TaskType == "MoreInfo_task">
+        <#if body.variables.ICMoreAccountName?? && body.variables.ICMoreAccountName?has_content>
+		    <#assign subject><#outputformat "HTML">Credit assessment - Additional information requested for ${body.variables.ICMoreAccountName?no_esc}</#outputformat></#assign>
+		</#if>
+    </#if>
+    <#return subject>
+</#function>
+<#function hasUserRole user expectedUserRole>
+    <#assign hasRole = false>
+        <#if user.identity.selectedGroup.userRole == expectedUserRole>
+            <#assign hasRole = true>
+        </#if>
+    <#return hasRole>
+</#function>
+<#function businessPolicyRulesHit policyRules>
+  <#assign rules = []>
+  <#list policyRules as policyRule>
+    <#if policyRule.policyRuleTriggered == "1">
+        <#local str = policyRule.policyRuleNumber + ", " + policyRule.policyRuleLabel>
+        <#assign rules += [str]>
+    </#if>
+  </#list>
+  <#return rules?join("|||")?json_string>
+</#function>
+<#function getCountryShorthand countryFullName>
+    <#if countryFullName == "Netherlands">
+        <#return "NL">
+    <#elseif countryFullName == "Belgium">
+        <#return "BE">
+    <#elseif countryFullName == "Germany">
+        <#return "GE">
+    <#elseif countryFullName == "Spain">
+        <#return "ES">
+    </#if>
+    <#return "Unknown">
+</#function>
+<#function dateAddDays date days>
+    <#assign timeInMilliseconds = (1000 * 60 * 60 * 24 * days) >
+    <#assign aDate = date?long + timeInMilliseconds?long>
+    <#return aDate?number_to_date>
+</#function>
+<#function getCancellationStatus cancellationType>
+    <#if cancellationType == "signingAuthorityNotVerified">
+        <#return "Signing Authority Not Validated">
+    <#elseif cancellationType == "signingAuthorityIdNotValidated">
+        <#return "Identification Not Checked">
+    <#elseif cancellationType == "stockReservationIsNotUpdated">
+        <#return "Stock reservation was not updated">
+    <#elseif cancellationType == "vehicleOrderNotCreated">
+        <#return "Vehicle order was not created">
+    <#elseif cancellationType == "creditAssessmentCancelled">
+        <#return "Credit assessment was cancelled">
+    <#elseif cancellationType == "creditAssessmentDeclined">
+        <#return "Credit assessment was declined">
+    <#elseif cancellationType == "manualChangesInMilesCancelled">
+        <#return "Manual changes in Miles not done">
+    <#elseif cancellationType == "opportunityNotUpdated">
+        <#return "Cancelled because the opportunity was not updated">
+    <#elseif cancellationType == "businessPartnerIdOrContactIdNotReceived">
+        <#return "Cancelled because the BusinessPartnerId or ContactId was not received">
+    <#elseif cancellationType == "contractGenerationFailed">
+        <#return "Cancelled because contract creation failed">
+    <#elseif cancellationType == "masterLeaseAgreementGenerationFailed">
+        <#return "Cancelled because master lease agreement creation failed">
+    <#elseif cancellationType == "sepaMandateGenerationFailed">
+        <#return "Cancelled because SEPA mandate creation failed">
+    <#elseif cancellationType == "documentsSigningFailed">
+        <#return "Cancelled because documents signing failed">
+    <#elseif cancellationType == "documentsStoringFailed">
+        <#return "Cancelled because documents storing failed">
+    <#elseif cancellationType == "documentsNotSigned">
+        <#return "Cancelled because documents were not signed">
+    <#elseif cancellationType == "uploadContractToMilesFailed">
+        <#return "Cancelled because contract can not be uploaded to Miles">
+    <#elseif cancellationType == "uploadMasterLeaseAgreementToMilesFailed">
+        <#return "Cancelled because master lease agreement can not be uploaded to Miles">
+    <#elseif cancellationType == "uploadContractLogFileToMilesFailed">
+        <#return "Cancelled because contract log file can not be uploaded to Miles">
+    <#elseif cancellationType == "uploadMasterLeaseAgreementLogFileToMilesFailed">
+        <#return "Cancelled because master lease agreement log file can not be uploaded to Miles">
+    <#elseif cancellationType == "uploadSEPAMandateDocumentToMilesFailed">
+        <#return "Cancelled because SEPA mandate document can not be uploaded to Miles">
+    <#elseif cancellationType == "uploadSEPAMandateDocumentLogFileToMilesFailed">
+        <#return "Cancelled because SEPA mandate document log file can not be uploaded to Miles">
+    <#elseif cancellationType == "getQuotedVehicleDataFailed">
+        <#return "Cancelled because can not retrieve investment value of quoted vehicle">
+    <#elseif cancellationType == "icmoreCallFailed">
+        <#return "Cancelled because ICMore call failed">
+    <#elseif cancellationType == "fleetVehicleUpdateFailed">
+        <#return "Cancelled because Fleet Vehicle update failed">
+    <#elseif cancellationType == "accountManagerNotAssigned">
+        <#return "Cancelled because Account Manager was not assigned for Customer">
+    <#elseif cancellationType == "promoteProspectToCustomerFailed">
+        <#return "Cancelled because promote prospect to customer failed">
+    <#elseif cancellationType == "сustomerOnQuoteNotChanged">
+        <#return "Cancelled because Customer on quote not changed">
+    <#elseif cancellationType == "contractFromQuoteNotCreated">
+        <#return "Cancelled because Contract from quote not created">
+    <#elseif cancellationType == "driverToQuoteNotAssigned">
+        <#return "Cancelled because Driver to quote not assigned">
+    <#elseif cancellationType == "paymentPreferenceFailed">
+        <#return "Cancelled because payment preference was not created">
+    <#elseif cancellationType == "bankAccountFailed">
+        <#return "Cancelled because bank account was not created">
+    <#elseif cancellationType == "quoteNotSetToApproved">
+        <#return "Cancelled because Quote was not set to Approved">
+    <#elseif cancellationType == "verifySigningAuthorityFailed">
+        <#return "Cancelled because of unsuccessful signing authority check">
+    <#elseif cancellationType == "reIndexationProcessFailed">
+        <#return "Cancelled because the process of re-indexation on FO failed">
+    <#elseif cancellationType == "idCheckFailed">
+        <#return "Cancelled because ID check was failed">
+    <#elseif cancellationType == "checkIdTaskCreationFailed">
+        <#return "Cancelled because creation of Check ID task failed">
+    <#elseif cancellationType == "checkIdFailedTaskCreationFailed">
+        <#return "Cancelled because creation of Check ID Failed task failed">
+    <#elseif cancellationType == "checkIdSkippedTaskCreationFailed">
+        <#return "Cancelled because creation of Check ID Skipped task failed">
+    <#elseif cancellationType == "checkIdSuccessTaskCreationFailed">
+        <#return "Cancelled because creation of Check ID Success task failed">
+    <#elseif cancellationType == "docsNotGeneratedNotificationFailed">
+        <#return "Cancelled because creation of Notify User FO task failed">
+    <#elseif cancellationType == "removeSmeoProcessIdFailed">
+        <#return "Cancelled because smeo process id was not removed from ICMore">
+    <#elseif cancellationType == "cancelExistingSigningProcessFailed">
+        <#return "Cancelled because process of canceling of existing Esaw signing process failed">
+    <#elseif cancellationType == "createSignDocumentsEmbeddedFOTaskFailed">
+        <#return "Cancelled because creating FO task for embedded signing failed">
+    <#elseif cancellationType == "documentsSigningWithEmailFailed">
+        <#return "Cancelled because documents signing with email failed">
+    <#elseif cancellationType == "retrieveSigningUrlFailed">
+        <#return "Cancelled because retrieving signing url failed">
+    <#elseif cancellationType == "checkIdTaskDeletionFailed">
+        <#return "Cancelled because Check ID FO task deletion failed">
+    </#if>
+    <#return "Process was cancelled">
+</#function>
+<#macro printObjectToJson name="" source="" dontEscape="false" nested="false" hasNext="false">
+    <#if name?has_content>
+        "${name}":
+    </#if>
+    <#if source?is_hash>
+        {
+            <#list source?keys as key>
+                <#assign hn = key?has_next?c>
+                <@printObjectToJson name=key source=source[key] dontEscape=dontEscape nested="true" hasNext=hn />
+            </#list>
+        }<#if nested=="true" && hasNext=="true">,</#if>
+    <#elseif source?is_sequence>
+        [
+            <#list source as seqObject>
+                <#if seqObject?has_content>
+                    <#assign hn = seqObject?has_next?c>
+                    <@printObjectToJson source=seqObject dontEscape=dontEscape nested="true" hasNext=hn />
+                </#if>
+            </#list>
+        ]<#if nested=="true" && hasNext=="true">,</#if>
+    <#elseif source?is_boolean>
+        "${source?string("true","false")}"<#if nested=="true" && hasNext=="true">,</#if>
+    <#elseif source?is_number>
+        "${source?c}"<#if nested=="true" && hasNext=="true">,</#if>
+    <#else>
+        <#if dontEscape=="true">"${source}"<#else>"${source?json_string}"</#if>
+        <#if nested=="true" && hasNext=="true">,</#if>
+    </#if>
+</#macro>
+<#macro printObjectToJsonString name="" source="" dontEscape="false" nested="false" hasNext="false">
+    <@compress single_line=true>
+    <#if name?has_content>
+        \"${name}\":
+    </#if>
+    <#if source?is_hash>
+        {
+            <#list source?keys as key>
+                <#assign hn = key?has_next?c>
+                <@printObjectToJsonString name=key source=source[key] dontEscape=dontEscape nested="true" hasNext=hn />
+            </#list>
+        }<#if nested=="true" && hasNext=="true">,</#if>
+    <#elseif source?is_sequence>
+        [
+            <#list source as seqObject>
+                <#if seqObject?has_content>
+                    <#assign hn = seqObject?has_next?c>
+                    <@printObjectToJsonString source=seqObject dontEscape=dontEscape nested="true" hasNext=hn />
+                </#if>
+            </#list>
+        ]<#if nested=="true" && hasNext=="true">,</#if>
+    <#elseif source?is_boolean>
+        \"${source?string("true","false")}\"<#if nested=="true" && hasNext=="true">,</#if>
+    <#elseif source?is_number>
+        \"${source?c}\"<#if nested=="true" && hasNext=="true">,</#if>
+    <#else>
+        <#if dontEscape=="true">\"${source}\"<#else>\"${source?json_string}\"</#if>
+        <#if nested=="true" && hasNext=="true">,</#if>
+    </#if>
+    </@compress>
+</#macro>
+<#function determineMimeType fileName>
+   <#assign extensionsMap = {
+        'pdf': 'application/pdf',
+        'docx': 'application/msword',
+        'xlsx': 'application/vnd.ms-excel',
+        'pptx': 'application/vnd.ms-powerpoint',
+        'tif': 'image/tif',
+        'tiff':'image/tiff',
+        'gif': 'image/gif',
+        'png': 'image/png',
+        'jpeg': 'image/jpeg',
+        'jpg':'image/jpg',
+        'bmp': 'image/bmp',
+        'txt': 'text/plain'
+    }>
+  <#return extensionsMap[fileName?keep_after_last(".")?lower_case]>
+</#function>
+<#macro uploadToDMSPiper uploadFields secureData headers historyProcess='false'>
+    <#setting time_zone="Europe/Amsterdam">
+    <#assign aDateTime = .now>
+    <#assign timestamp = (aDateTime?long / 1000)?round?c>
+    <#-- The documentRestrictionCode can have two values '70 - All users' and '71 - Underwriters only' -->
+    <#if secureData.user.identity.selectedGroup.userRole?contains("Underwriter")>
+        <#assign documentRestrictionCode = 71>
+    <#else>
+        <#assign documentRestrictionCode = 70>
+    </#if>
+    <#list uploadFields as uploadField>
+        <#if headers.filesInfo[uploadField]??>
+            {
+                "type" : "transform",
+                "name" : "dummy",
+                "script" : "uploadedFiles = [:];"
+            }, 
+            <#if headers.filesInfo[uploadField]?is_sequence>
+                <#list 0..headers.filesInfo[uploadField]?size-1 as index>
+                    <#if historyProcess?? && historyProcess == 'true'>
+                    {
+                        "type" : "action",
+                        "name" : "getVariableInstanceList",
+                        "script" : "headers.processInstanceId = processId"
+                    },
+                    {
+                        "type": "script",
+                        "name": "transformVariableInstancesToVariables"
+                    },
+                    <#else>
+                    {
+                        "type" : "action",
+                        "name" : "getProcessVariables",
+                        "script" : "headers.processInstanceId = processId; headers.handleExceptionTemplate = 'getProcessVariables_error'; headers.handleRestExceptionTemplate = 'getProcessVariables_error'"
+                    },
+                    {
+                        "type": "action",
+                        "name": "handleProcessIsAlreadyFinished_piper",
+                        "script": "body.processInstanceId = processId"
+                    },
+                    </#if>
+                    {
+                        "type": "script",
+                        "name": "transformCamundaVariablesToObject"
+                    },
+                    {
+                        "type" : "action",
+                        "name" : "storeManuallyUploadedDocumentToDMS",
+                        "script" : "initialBody = body; body = [\"documentRestrictionCode\":\"${documentRestrictionCode}\", \"uploadField\": \"${uploadField}\", \"fileIndex\": ${index}, \"fileData\": headers[\"${uploadField}\"][${index}], \"variables\": body]; headers.SAMLArt = SAMLArt; headers.handleExceptionTemplate = 'downloadAndStoreFilesToDMS_error'; headers.handleSoapExceptionTemplate = 'downloadAndStoreFilesToDMS_error'"
+                    },
+                    {
+                        "type" : "transform",
+                        "name" : "createManuallyUploadedFileInfoObjectTransform",
+                        "script" : "requestId = body.requestId; requestError = body.requestError; body = [\"uploadField\": \"${uploadField}\", \"fileIndex\": ${index}, \"userFirstName\": userFirstName, \"userLastName\": userLastName, \"documentRestrictionCode\": ${documentRestrictionCode}, \"applicationId\": initialBody.ApplicationId];"
+                    },
+                    {
+                        "type" : "action",
+                        "name" : "startDocumentUploadStatusCheckProcess",
+                        "script" : "body.variables = initialBody; body.variables.tenantId = tenantId; body.variables.mainProcessInstanceId = processId; body.documentInfo = body.fileInfo; body.requestId = requestId; body.requestError = requestError;"
+                    }
+                    <#sep>, </#sep>
+                </#list>
+            <#else>
+                <#if historyProcess?? && historyProcess == 'true'>
+                {
+                    "type" : "action",
+                    "name" : "getVariableInstanceList",
+                    "script" : "headers.processInstanceId = processId"
+                },
+                {
+                    "type": "script",
+                    "name": "transformVariableInstancesToVariables"
+                },
+                <#else>
+                {
+                    "type" : "action",
+                    "name" : "getProcessVariables",
+                    "script" : "headers.processInstanceId = processId; headers.handleExceptionTemplate = 'getProcessVariables_error'; headers.handleRestExceptionTemplate = 'getProcessVariables_error'"
+                },
+                {
+                    "type": "action",
+                    "name": "handleProcessIsAlreadyFinished_piper",
+                    "script": "body.processInstanceId = processId"
+                }, 
+                </#if>
+                {
+                    "type": "script",
+                    "name": "transformCamundaVariablesToObject"
+                },
+                {
+                    "type" : "action",
+                    "name" : "storeManuallyUploadedDocumentToDMS",
+                    "script" : " initialBody = body; body = [\"documentRestrictionCode\":\"${documentRestrictionCode}\",\"uploadField\": \"${uploadField}\", \"fileData\": headers[\"${uploadField}\"], \"variables\": body]; headers.SAMLArt = SAMLArt; headers.handleExceptionTemplate = 'downloadAndStoreFilesToDMS_error'; headers.handleSoapExceptionTemplate = 'downloadAndStoreFilesToDMS_error'"
+                },
+                {
+                    "type" : "transform",
+                    "name" : "createManuallyUploadedFileInfoObjectTransform",
+                    "script" : "requestId = body.requestId; requestError = body.requestError; body = [\"uploadField\": \"${uploadField}\", \"userFirstName\": userFirstName, \"userLastName\": userLastName, \"documentRestrictionCode\": ${documentRestrictionCode}, \"applicationId\": initialBody.ApplicationId];"
+                },
+                {
+                    "type" : "action",
+                    "name" : "startDocumentUploadStatusCheckProcess",
+                    "script" : "body.variables = initialBody; body.variables.tenantId = tenantId; body.variables.mainProcessInstanceId = processId; body.documentInfo = body.fileInfo; body.requestId = requestId; body.requestError = requestError;"
+                }
+            </#if>
+        </#if>
+    </#list>
+</#macro>
+<#macro printDocumentsVariables documentsVariables trailingComma=true>
+    <#list documentsVariables as documentVariable>
+        "${documentVariable.name}": {
+            "value" : "{\"fileName\": \"${documentVariable.fileName?json_string}\", \"addedBy\": \"${documentVariable.addedBy?json_string}\", \"dateAdded\": \"${documentVariable.dateAdded}\", \"id\": \"${documentVariable.id}\"}",
+            "type" : "Json"
+        }
+        <#if trailingComma>
+            ,
+        <#else>
+            <#sep>,</#sep>
+        </#if>
+    </#list>
+</#macro>
+<#macro printCamundaVariablesForProcessStart camundaVariables>
+    <#list camundaVariables?keys as variableName>
+        "${variableName}": {
+            "value" : "${camundaVariables[variableName].value}", 
+            "type": "${camundaVariables[variableName].type}"
+        }
+    </#list>
+</#macro>
+<#macro XMLToJSON node prefix="">
+    <#if (node?children?size==1 && node?children?first?node_type=='text' )>
+
+        "${node?children?first?j_string}"
+
+    <#else>
+        <#if ((node?children?first?node_name)?? && (node?children?first?next_sibling??) && (node?children?first?node_name == node?children?first?next_sibling?node_name))>
+            [
+            <#list node?children as item>
+                <#if item?node_name?has_content>
+                    {
+                        "${prefix}${item?node_name}" :
+                        <@XMLToJSON item />
+                    }
+                    <#if item_has_next>,</#if>
+                <#else>
+                    <@XMLToJSON item />
+                    <#if item_has_next>,</#if>
+                </#if>
+            </#list>
+            ]
+        <#else>
+            {
+            <#list node?children as item>
+                <#-- <#if item?node_name != "@text"> -->
+                  "${prefix}${item?node_name}":
+                  <@XMLToJSON item />
+                  <#if item_has_next>,</#if>
+                <#-- </#if> -->
+            </#list>
+            <#if node?node_name == "data" && node?parent?children?size gt 1 && node?parent?children[1]?node_name == "metadata">
+            <#if node?children?size gt 0>,</#if>"metadata": <@XMLToJSON node?parent?children[1] />
+            </#if>
+            <#if node?node_name == "operationstatus">
+                "businesserror": "${node.@businesserror}", 
+                "technicalerror": "${node.@technicalerror}",
+                "calculationerror": "${node.@calculationerror}"
+            </#if>
+            }
+        </#if>
+    </#if>
+</#macro>
+
+<#-- Get data based on map -->
+<#function getMappedDataByKey map mapKey>
+    <#return map[mapKey]!mapKey/>
+</#function>
+
+<#-- Get id attribute value for customerState miles update-->
+<#function getCustomerStateId mapKey>
+    <#assign id = {
+        "New": "690",
+        "Discontinued": "691",
+        "On Hold": "692",
+        "Block Payments": "693",
+        "Active (fleet)": "694",
+        "Active (non-fleet)": "100357",
+        "In arrears": "100555",
+        "Bankrupt": "425075",
+        "Blocked": "425051",
+        "Broker Prospect": "2803",
+        "In review": "425978",
+        "Qualified (non-fleet)": "100356",
+        "Qualified (fleet)": "100066",
+        "No active fleet": "100071"
+    }>
+    <#return getMappedDataByKey(id, mapKey)>
+</#function>
+
+<#-- Get id attribute value for fleetVehicle status update-->
+<#function getFleetVehicleStatusId mapKey>
+    <#assign id = {
+        "Pending Customer Reservation (SME Online)": "400223"
+    }>
+    <#return getMappedDataByKey(id, mapKey)>
+</#function>
+
+<#-- the 2 functions below are used by the XMLToJSONAttributes macro -->
+<#function hasArrayOfChildren node>
+    <#assign name=""/>
+    <#list node?children as child>
+        <#if child?node_type != 'text'>
+            <#if name?length == 0>
+                <#assign name=child?node_name/>
+            <#else>
+                <#if name == child?node_name>
+                    <#return child?node_name/>
+                <#else>
+                    <#return ""/>
+                </#if>
+            </#if>
+        </#if>
+    </#list>
+    <#return ""/>
+</#function>
+
+<#function elementHasTextContent node>
+    <#list node?children as child>
+        <#if child?node_type == 'text'>
+           <#if child?trim?length gt 0>
+                <#return child/>
+           </#if>
+        </#if>
+        <#else>
+       <#return ""/>
+    </#list>
+    <#return "(empty)"/>
+</#function>
+
+<#-- XMLToJSONAttributes will add the attributes of the XML to the Json Output -->
+<#-- this wil have a side effect for elements that contain both attributes and content ->
+<#-- only in that case, the content will be added as a '__txt' field in the child object --> 
+<#macro XMLToJSONAttributes node partOfArray=false>
+    <#if node?node_type == 'element' && !partOfArray && node.@@?size == 0 >
+        <#assign content = elementHasTextContent(node)/>
+        "${node?node_name}" : <#if content != '(empty)'>"${content?json_string}"</#if>
+    </#if>
+    <#if node?node_type == 'attribute'>
+         "_${node?node_name}": "${node?first}"
+    </#if>
+    <#if node?node_type = 'text'>
+        <#if node?trim?length gt 0>
+        "${node?json_string}"
+        </#if> 
+    </#if>
+
+    <#if node?node_type != 'attribute' && ( node?children?size gt 0 || node.@@?size gt 0) >
+        <#if node?node_type = 'element' && node.@@?size gt 0>
+            "${node?node_name}": 
+        </#if>
+        <#assign arrayName = hasArrayOfChildren(node)/>
+        <#if arrayName?length gt 0>
+            {"${arrayName}" :
+            [
+                <#list node?children?filter(x -> x?node_type != 'text') as child>
+                        <@XMLToJSONAttributes child  true /><#sep>,
+                </#list>
+            ]
+            }
+        <#else>
+            <#if node?children?filter(x -> x?node_type != 'text')?size gt 0 >
+            {
+                <#list node?children?filter(x -> x?node_type != 'text') as child>
+                    <@XMLToJSONAttributes child  /><#sep>,
+                </#list>
+            }<#else>
+                <#if node?children?filter(x -> x?node_type == 'text')?size gt 0  && elementHasTextContent(node)=='(empty)' >
+                {
+                }
+                </#if>
+            </#if>
+        </#if>
+        <#if node?node_type = 'element' && node.@@?size gt 0 && elementHasTextContent(node) == '(empty)'>
+            <#assign content = elementHasTextContent(node)/>
+            <#if content != '(empty)'>"__text": "${content}",</#if>
+            ,
+            <#list node.@@ as attr>
+                <@XMLToJSONAttributes attr /><#sep>,
+            </#list>
+        </#if>
+        <#if node?node_type = 'element' && node.@@?size gt 0 && elementHasTextContent(node) != '(empty)'>
+        {
+            <#assign content = elementHasTextContent(node)/>
+            <#if content != '(empty)'>"__text": "${content}",</#if>
+            <#list node.@@ as attr>
+                <@XMLToJSONAttributes attr /><#sep>,
+            </#list>
+        }
+        </#if>
+    </#if>
+    <#if node?node_name == "data" && node?parent?children?size gt 1 && node?parent?children[1]?node_name == "metadata">
+        ,<@XMLToJSONAttributes node?parent?children[1] />
+    </#if>
+</#macro>
+
+
+<#-- JSONToXML transforms  a JSON  to XML -->
+<#-- attributes must be prefixed by an underscore ('_') -->
+<#-- check=true:  JSONToXML will call a macro 'checkNode' in your template to change specific values -->
+<#-- shallow=true:  JSONToXML will only print the hash attributes  under the node -->
+<#-- level: used internally by JSONToXML for shallow printing-->
+<#macro JSONToXML node check=false checkHash=false shallow=false level=0 >
+    <#if shallow && level gt 0>
+    <#return>
+    </#if> 
+    <#if node?is_hash>
+        <#list node as k, v>
+            <#if hasAttributes(v)>
+                <#if checkHash>
+                    <#assign checkNodeObj><@checkNode k v/></#assign>
+                    <@printAttributeNodex k checkNodeObj?eval/>
+                <#else>
+                    <@printAttributeNodex k v/>
+                </#if>
+            <#elseif v?is_sequence>
+                <#list v as child>
+                    <#t><${k}>
+                        <@JSONToXML node=child level=level+1 shallow=shallow />
+                    <#t></${k}>
+                </#list>
+            <#else>
+                <#if shallow && v?is_hash>
+                <#continue>
+                </#if>
+                <#t><${k}>
+                <#if v?is_hash>
+                    <@JSONToXML node=v level=level+1 shallow=shallow />
+                </#if>
+                <#if v?is_string>
+                    <#if check>
+                    <@checkNode k v/>
+                    <#else> 
+                    <#t>${v}
+                    </#if>
+                </#if>
+                <#t></${k}>
+            </#if>
+        </#list> 
+    </#if>
+</#macro>
+
+<#function hasAttributes node>
+    <#if node?is_hash>
+        <#list node as key, child>
+        <#if key[0] == '_'><#return true><#else><#return false></#if>
+        </#list>
+    </#if>
+    <#return false>
+</#function>
+
 <#macro printAttributeNodex key node>
 <#assign text=""/>
 <#compress>

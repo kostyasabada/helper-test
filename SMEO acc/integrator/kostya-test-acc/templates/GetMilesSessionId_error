@@ -1,0 +1,8 @@
+{   
+    "status": "true",
+    "MILES_sessionID": "false",
+    "bpmnError": {
+        "bpmnErrorCode": "MilesCallFailedError",
+        "bpmnErrorMessage": "Error occured getting SessionId."
+    }
+}

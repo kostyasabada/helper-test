@@ -1,0 +1,147 @@
+{
+    "header": {
+    <#-- take from confluence -->
+        "userName": "${headers.restConnectorProperties.milesUser}",
+        "password": "${headers.restConnectorProperties.milesPassword}",
+        "Country": "${body.countryCode?lower_case}",
+        "report": 1,
+        "status": "",
+        "message": ""
+    },
+    "body": {
+        "data": {
+            "root": {
+                "contract": {
+                    "CONTRACT_ID": "${body.quoteIdWithoutPrefix}",
+                    "LEASINGCOMPANY_ID": 400003,
+                    "LEASINGCOMPANY_NAME": "Athlon Car Lease Spain, S.A.",
+                    "LEASINGCOMPANY_FORMADDRESS": "Avenida de Bruselas 30\r\n28108 Alcobendas\r\nMadrid Spain",
+                    "LEASINGCOMPANY_ADDRESSLINE1": "Avenida de Bruselas 30",
+                    "LEASINGCOMPANY_POSTALCODE": "28108",
+                    "LEASINGCOMPANY_CITY": "Alcobendas",
+                    "LEASINGCOMPANY_STATE": "Madrid",
+                    "LEASINGCOMPANY_VATNUMBER": "A62288428",
+                    "LEASINGCOMPANY_TELEPHONE": "+34 902566036",
+                    "LEASINGCOMPANY_FAX": "+34 934776561",
+                    "CON_REFERENCE": "${body.quoteIdWithoutPrefix}",
+                    "CONTRACT_STARTDATE": "",
+                    "CONTRACT_ENDDATE": "",
+                    "QUOTE_ID": "${body.quoteIdWithoutPrefix}",
+                    <#--"QUOTE_ID": 1680425,    for TST-->
+                    "CUSTOMER_TRADINGNAME": "${body.companyName}",
+                    "CUSTOMER_ADDRESSLINE1": "${body.companyStreet} <#if body.companyHouseNumber?has_content>${body.companyHouseNumber}</#if>",
+                    "CONTACT_POSTALCODE": "${body.companyPostalCode}",
+                    "CONTACT_CITY": "${body.companyCity}",
+                    "CONTACT_STATE": "",
+                    "CUSTOMER_VATNUMBER": "${body.vatNumber}",
+                    "CUSTOMER_FORMADDRESS": "",
+                    "CUSTOMER_FULLNAME": "${body.companyName}",
+                    <#if body.calculationDetailsVehicleId?has_content>
+                        "VEHICLE_ID": ${body.calculationDetailsVehicleId},
+                    <#else>
+                        "VEHICLE_ID": 0,
+                    </#if>
+                    "VEHICLE_EXTRAOPTIONS_ID": 0,
+                    "VEHICLE_DESCRIPTION": null,
+                    "VEHICLE_CHASSISNUMBER": null,
+                    <#if body.co2Emmision?has_content>
+                        "VEHICLE_CO2EMISSION": ${body.co2Emmision},
+                    <#else>
+                        "VEHICLE_CO2EMISSION": 0,
+                    </#if>
+                    "VEHICLE_FUELTYPE": null,
+                    "VEHICLE_NROFDOORS": null,
+                    "VEHICLE_LICENSEPLATE": null,
+                    <#if body.vehicleConsumerPrice?has_content>
+                        "VEHICLE_CONSUMERPRICE": ${body.vehicleConsumerPrice},
+                    <#else>
+                        "VEHICLE_CONSUMERPRICE": 0,
+                    </#if>
+                    <#if body.consumerPrice?has_content>
+                        "INVESTMENTINCLVAT": ${body.consumerPrice},
+                    <#else>
+                        "INVESTMENTINCLVAT": 0,
+                    </#if>
+                    "VEHICLE_DELIVERY_LOCATION": "<#if body.deliveryCity?has_content>${body.deliveryCity}</#if>, <#if body.deliveryRegion?has_content>${body.deliveryRegion}</#if>",
+                    "DRIVER_FULLNAME": "${body.firstName} ${body.lastName}",
+                    "VEHICLE_COLOR": null,
+                    <#if body.calculationDetailsMileage?has_content>
+                        "LEASESERVICE_DISTANCE": ${body.calculationDetailsMileage},
+                    <#else>
+                        "LEASESERVICE_DISTANCE": 0,
+                    </#if>
+                    
+                    "LEASESERVICE_DISTANCEUNIT": "Km",
+                    <#if body.calculationDetailsDuration?has_content>
+                        "LEASESERVICE_DURATION": ${body.calculationDetailsDuration},
+                    <#else>
+                        "LEASESERVICE_DURATION": 0,
+                    </#if>
+                    
+                    "LEASESERVICE_DURATIONUNIT": "Meses",
+                    "DEPOSIT_AMOUNT": 0,
+                    "UPFRONT": 0,
+                    "GREEN_CAR_DISCOUNT": 0,
+                    <#if body.calculationDetailsMileage?has_content>
+                        "LEASESERVICE_KMPERYEAR": ${body.calculationDetailsMileage},
+                    <#else>
+                        "LEASESERVICE_KMPERYEAR": 0,
+                    </#if>
+                    
+                    "LESSOR_RESPONSIBLE": "Eric Garcia-Portillo Rodriguez",
+                    "OPTIONLIST": null,
+                    "LEGAL_REP_FULLNAME": "${body.firstName} ${body.lastName}",
+                    "LEGAL_REP2_FULLNAME": null,
+                    "BROKER_LOGO": null,
+                    <#if body.excessMileagePrice?has_content>
+                        "KILOMETER_ADJUSTMENT": ${body.excessMileagePrice},
+                    <#else>
+                        "KILOMETER_ADJUSTMENT": 0,
+                    </#if>
+                    
+                    "CONTRACTTYPECODE": 400219,
+                    "STRETCH0": 0,
+                    "STRETCH1": 0,
+                    "STRETCH2": 0,
+                    "STRETCH3": 0,
+                    "COEFFICIENT0": null,
+                    "COEFFICIENT1": null,
+                    "COEFFICIENT2": null,
+                    "COEFFICIENT3": null,
+                    "totals": {
+                        "QUOTE_ID": 0,
+                        "CUSTOMERNUMBER": 0,
+                        "RENTING": 0,
+                        "SERVICES_TOTAL": 0,
+                        "MAINTENANCE_REPAIR": <#if body.milesComponentServices?? && body.milesComponentServices?contains("MAINTENANCE_REPAIR")>1<#else>0</#if>,
+                        "SUMMER_TIRES": <#if body.milesComponentServices?? && body.milesComponentServices?contains("SUMMER_TIRES")>1<#else>0</#if>,
+                        "WINTER_TIRES": 0,
+                        "ROAD_ASSISTANCE": <#if body.milesComponentServices?? && body.milesComponentServices?contains("ROAD_ASSISTANCE")>1<#else>0</#if>,
+                        "ROAD_TAX": <#if body.milesComponentServices?? && body.milesComponentServices?contains("ROAD_TAX")>1<#else>0</#if>,
+                        "FINE_MANAGEMENT": <#if body.milesComponentServices?? && body.milesComponentServices?contains("FINE_MANAGEMENT")>1<#else>0</#if>,
+                        "MANAGEMENT_FEE": <#if body.milesComponentServices?? && body.milesComponentServices?contains("MANAGEMENT_FEE")>1<#else>0</#if>,
+                        "CAR2USE": 0,
+                        "INSURANCE_TOTAL": 0,
+                        "THIRD_PARTY_LIABILITY": <#if body.milesComponentServices?? && body.milesComponentServices?contains("THIRD_PARTY_LIABILITY")>1<#else>0</#if>,
+                        "MATERIAL_DAMAGE": <#if body.milesComponentServices?? && body.milesComponentServices?contains("MATERIAL_DAMAGE")>1<#else>0</#if>,
+                        "OWNRISK": 0,
+                        "MONTHLY_COSTS": 0,
+                        "FUEL_RESERVCE": 0,
+                        "SUBSTITUTE_VEHICLE": <#if body.milesComponentServices?? && body.milesComponentServices?contains("SUBSTITUTE_VEHICLE")>1<#else>0</#if>,
+                        "TOTAL_PER_MONTH_EXCL_VAT": 0,
+                        "TOTAL_PER_MONTH_VATAMOUT": 0,
+                        "TOTAL_PER_MONTH_INCL_VAT": 0,
+                        "QUOTEPRINTDETAIL": 0,
+                        "KILOMETER_ADJUSTMENT": 0,
+                        "LEASINGCOMPANY_ID": 400003,
+                        "NUMBER_OF_SUMMER_TIRES": 0,
+                        "NUMBER_OF_WINTER_TIRES": 0,
+                        "LEASEPRICE": 0,
+                        "LEASEPRICEINCLFUELINCLVAT": 0
+                    }
+                }
+            }
+        },
+        "binary": ""
+    }
+}

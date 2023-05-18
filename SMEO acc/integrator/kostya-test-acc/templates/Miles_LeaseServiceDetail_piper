@@ -1,0 +1,29 @@
+ {
+    "pipes": [
+        <#if body.bpmnError??>
+            {
+                "type": "transform",
+                "name": "transformObjectToJson"
+            }
+        <#else>
+            {
+                "name": "addMilesHeaders",
+                "type": "script"
+            },
+            {
+                "type": "action",
+                "name": "Miles_GetLeaseServiceDetail",
+                "script" : "headers.handleSoapExceptionTemplate = 'GetMilesLeaseServiceDetail_error'; headers.handleExceptionTemplate = 'GetMilesLeaseServiceDetail_error'; MILES_sessionID = body.MILES_sessionID"
+            },
+            {
+                "type": "transform",
+                "name": "Miles_GetLeaseServiceDetail_setVariables"
+            },
+            {
+                "type": "action",
+                "name": "Miles_RemoveSessionID_piper",
+                "script" : "body = [objectToReturn: body, MILES_sessionID: MILES_sessionID]"
+            }
+        </#if>
+    ]
+}

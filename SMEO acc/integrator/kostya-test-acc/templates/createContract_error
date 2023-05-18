@@ -1,0 +1,8 @@
+{   
+    "status": "true",
+    "errorOccured": "true",
+    "bpmnError": {
+        "bpmnErrorCode": "CreateContractError",
+        "bpmnErrorMessage": "<#if body.messsage?? && body.message?has_content>${body.message}<#else>Generate contract call failed</#if>"
+    }
+}

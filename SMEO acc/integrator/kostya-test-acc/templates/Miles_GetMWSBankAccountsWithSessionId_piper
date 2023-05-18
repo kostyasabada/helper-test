@@ -1,0 +1,24 @@
+{
+    "pipes": [
+        <#if body.bpmnError??>
+            {
+                "type": "transform",
+                "name": "transformObjectToJson"
+            }
+        <#else>
+            {
+                "name": "addMilesHeaders",
+                "type": "script"
+            },
+            {
+                "type": "action",
+                "name": "Miles_GetMWSBankAccounts",
+                "script": "MILES_sessionID = body.MILES_sessionID; businessPartnerId = body.businessPartnerId; headers.handleSoapExceptionTemplate = 'Miles_error'; headers.handleExceptionTemplate = 'Miles_error'"
+            },
+            {
+                "type": "transform",
+                "name": "Miles_GetMWSBankAccounts_result"
+            }
+        </#if>
+    ]
+}

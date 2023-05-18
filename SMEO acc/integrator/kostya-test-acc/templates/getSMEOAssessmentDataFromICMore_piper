@@ -1,0 +1,12 @@
+{
+    "pipes": [
+        {
+            "type": "action",
+            "name": "getSMEOAssessmentDataFromICMore"
+        },
+        {
+            "type": "transform",
+            "name": "getSMEOAssessmentDataFromICMore_setVariables"
+        }
+    ]
+}

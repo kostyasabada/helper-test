@@ -1,0 +1,12 @@
+{
+    "pipes": [
+        {
+            "name": "SignicatStatusCheck",
+            "type": "action"
+        },
+        {
+            "name": "SignicatStatusCheck_setVariables",
+            "type": "transform"
+        }
+    ]
+}

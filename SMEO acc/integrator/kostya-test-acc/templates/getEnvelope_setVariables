@@ -1,0 +1,78 @@
+<#if body.errorOccured?? && body.errorOccured == "true">
+{
+    "bpmnError": {
+        "bpmnErrorCode": "${body.bpmnError.bpmnErrorCode}",
+        "bpmnErrorMessage": "${body.bpmnError.bpmnErrorMessage}"
+    }
+}
+<#elseif body.status?? &&  body.status == "Completed">
+<#assign signDocumentsUrl = "" />
+    <#list body.signers as signer>
+        <#if signer.signDocumentsUrl?? && signer.signDocumentsUrl?has_content>
+            <#assign signDocumentsUrl = signer.signDocumentsUrl />
+            <#break>
+        </#if>
+    </#list>
+    {
+        "status": "true",
+        "variablesToSet": {
+            "documentStatus": "${body.status}",
+            "SignDocumentsUrl": "${signDocumentsUrl}",
+            <#list body.documents as document>
+                <#if document.fileName?contains("Lease contract")> 
+                    "contractID": "${document.flowDocumentId}",
+                    "contractLogID": "${document.logDocumentId}",
+                    "contractFileName": "${document.fileName}",
+                <#elseif document.fileName?contains("Master lease agreement")>
+                    "masterLeaseAgreementID": "${document.flowDocumentId}",
+                    "masterLeaseAgreementLogID": "${document.logDocumentId}",
+                    "masterLeaseAgreementFileName": "${document.fileName}",
+                <#elseif document.fileName?contains("mandate")>
+                    "sepaMandateID": "${document.flowDocumentId}",
+                    "sepaMandateLogID": "${document.logDocumentId}",
+                    "sepaMandateFileName": "${document.fileName}"
+                </#if>
+            </#list>
+        },
+        "saveToDB": [
+            {
+                "variableName": "documentStatus",
+                "type": "STRING",
+                "value": "${body.status}"
+            },
+            {
+                "variableName": "signDocumentsUrl",
+                "type": "STRING",
+                "value": "${signDocumentsUrl}"
+            }
+        ]
+    }
+    
+<#else>
+    <#assign signDocumentsUrl = "" />
+    <#list body.signers as signer>
+        <#if signer.signDocumentsUrl?? && signer.signDocumentsUrl?has_content>
+            <#assign signDocumentsUrl = signer.signDocumentsUrl />
+            <#break>
+        </#if>
+    </#list>
+    {
+        "status": "true",
+        "variablesToSet":{
+            "documentStatus": "${body.status}",
+            "SignDocumentsUrl": "${signDocumentsUrl}"
+        },
+        "saveToDB": [
+            {
+                "variableName": "documentStatus",
+                "type": "STRING",
+                "value": "${body.status}"
+            },
+            {
+                "variableName": "signDocumentsUrl",
+                "type": "STRING",
+                "value": "${signDocumentsUrl}"
+            }
+        ]
+    }
+</#if>
