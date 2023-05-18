@@ -1,0 +1,10 @@
+{
+    "country": null,
+    "maxRecords": null,
+    "sessionId": null,
+    "newRecordsOnly": null,
+    "status": "NOK",
+    "message": "Tried to login with UserName [MilesApi]",
+    "idObjectType": null,
+    "apiObject": null
+}
