@@ -1,0 +1,65 @@
+<#macro checkNode key value>
+    <#switch key>
+         <#case "customerState"><#t>{ "__text": "${body.customerStatus}", "_group": "1066", "_id": "${getCustomerStateId(body.customerStatus)}", "_type": "204" }<#break>
+         <#case "paymentMethod"><#t>{ "__text": "${body.paymentMethod}", "_group": "1072", "_id": "425933", "_type": "176" }<#break>
+         <#case "isProspect"><#t>false<#break>
+         <#default>
+            <#if value?is_hash>
+                <#t><@printObjectToJson source=value /><#break>
+            <#else>
+                <#t>${value}<#break>
+            </#if>
+    </#switch>
+</#macro>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SofEnvelope>
+    <sessionID>${body.MILES_sessionID}</sessionID>
+    <data>
+        <MWSBusinessPartner>
+            <@JSONToXML node=body.data.MWSBusinessPartner shallow=true/>
+            
+            <#if body.data.MWSBusinessPartner.MWSBusinessUnit??>
+            <MWSBusinessUnit>
+                <@JSONToXML node=body.data.MWSBusinessPartner.MWSBusinessUnit/>
+            </MWSBusinessUnit>
+            </#if>
+            
+            <#if body.data.MWSBusinessPartner.MWSCustomerDetail??>
+            <MWSCustomerDetail>
+                <@JSONToXML node=body.data.MWSBusinessPartner.MWSCustomerDetail shallow=false check=true checkHash=true/>
+            </MWSCustomerDetail>
+            </#if>
+            
+            <#if body.data.MWSBusinessPartner.MWSSupplierDetail??>
+            <MWSSupplierDetail>
+                <@JSONToXML node=body.data.MWSBusinessPartner.MWSSupplierDetail/>
+            </MWSSupplierDetail>
+            </#if>
+            
+            <#if body.data.MWSBusinessPartner.MWSPartnerRole_Set??>
+            <MWSPartnerRole_Set>
+                <@JSONToXML node=body.data.MWSBusinessPartner.MWSPartnerRole_Set/>
+            </MWSPartnerRole_Set>
+            </#if>
+            
+            <#if body.data.MWSBusinessPartner.MWSCreditInfo??>
+            <MWSCreditInfo>
+                <@JSONToXML node=body.data.MWSBusinessPartner.MWSCreditInfo/>
+            </MWSCreditInfo>
+            </#if>
+            
+            <#if body.data.MWSBusinessPartner.MWSDynamicAttribute_Set??>
+            <MWSDynamicAttribute_Set>
+                <@JSONToXML node=body.data.MWSBusinessPartner.MWSDynamicAttribute_Set/>
+            </MWSDynamicAttribute_Set>
+            </#if>
+            
+            <#if body.data.MWSBusinessPartner.MWSLabel_Set??>
+            <MWSLabel_Set>
+                <@JSONToXML node=body.data.MWSBusinessPartner.MWSLabel_Set/>
+            </MWSLabel_Set>
+            </#if>
+        </MWSBusinessPartner>
+    </data>
+</SofEnvelope>
