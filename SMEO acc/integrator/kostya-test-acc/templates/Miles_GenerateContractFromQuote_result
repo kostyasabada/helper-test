@@ -1,0 +1,31 @@
+ <#if body.metadata?? && body.metadata.errorinfo?? && body.metadata.errorinfo.message?has_content>
+    {
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "${body.metadata.errorinfo.message}"
+        }
+    }
+<#elseif body.metadata?? && body.metadata.operationstatus?? && body.metadata.operationstatus._businesserror == "false" && body.metadata.operationstatus._calculationerror == "false" && body.metadata.operationstatus._technicalerror == "false">
+    {
+        "status": "true",
+        "processVariables": {
+            "contractId": "${body.data.MWSContract_Set.MWSContract.id?split(",")?join("")}"
+        },
+        "saveToDB": [
+            {
+                "variableName": "contractId",
+                "value": "${body.data.MWSContract_Set.MWSContract.id?split(",")?join("")}",
+                "type": "STRING"
+            }
+        ]
+    }
+<#else>
+    {   
+        "status": "true",
+        "bpmnError": {
+            "bpmnErrorCode": "MilesCallFailedError",
+            "bpmnErrorMessage": "GenerateContractFromQuote error"
+        }
+    }
+</#if>
