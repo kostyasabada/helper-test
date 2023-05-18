@@ -1,0 +1,9 @@
+{
+    "pipes": [
+        {
+            "type" : "action",
+            "name" : "manualChangesInMiles",
+            "script" : "headers.taskId = body.answers.taskid.data.answer[0]"
+        }
+    ]
+}
