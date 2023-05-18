@@ -1,0 +1,9 @@
+{
+    "pipes": [
+        {
+            "type" : "action",
+            "name" : "createSEPAMandate",
+            "script" : "headers.handleExceptionTemplate =  'createSEPAMandate_error'; headers.handleRestExceptionTemplate = 'createSEPAMandate_error'"
+        }
+    ]
+}
