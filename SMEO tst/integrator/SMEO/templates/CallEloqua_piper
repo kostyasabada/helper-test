@@ -1,0 +1,22 @@
+{
+    "pipes": [
+        {
+            "name": "CallEloqua",
+            "type": "action",
+            "script": "body= body; camundaId = body.variables.MainProcessInstanceId; firstname = body.variables.ContactFirstName; surname = body.variables.ContactLastName; emailTo = body.variables.ContactEmailAddress; carMakeModel = body.variables.carMakeModel; manualDecisionDescription = body.savedVariables.manualDecisionDescription != null ? body.savedVariables.manualDecisionDescription : ''; headers.handleExceptionTemplate =  'CallEloqua_error'; headers.handleRestExceptionTemplate = 'CallEloqua_error'; headers.formId = body.variables.EloquaFormId" 
+        },
+        {
+            "name": "generateEloquaCall",
+            "type": "script"
+        },
+        {
+            "name": "SendEloquaDate",
+            "type": "action",
+            "script": "headers.handleExceptionTemplate =  'callEloqua_error'; headers.handleRestExceptionTemplate = 'callEloqua_error'"
+        }, 
+        {
+            "name": "CallEloqua_setVariables",
+            "type": "transform"
+        }
+    ]
+}
