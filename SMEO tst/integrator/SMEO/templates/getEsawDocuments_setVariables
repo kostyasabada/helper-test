@@ -1,0 +1,11 @@
+{
+    "files": [
+        <#list body.downloadedFiles as file>
+        {
+            "fileName": "${file.fileName}",
+            "data": "${file.data}"
+        }
+        <#sep>,
+        </#list>
+    ]
+}

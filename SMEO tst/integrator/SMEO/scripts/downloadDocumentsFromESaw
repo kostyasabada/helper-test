@@ -1,0 +1,14 @@
+body.downloadedFiles = []
+body.fileNames = []
+
+body.filesToStore.each {
+    def file = it.link.toURL()?.getBytes()
+    def fileObj = [:]
+    
+    fileObj.fileName = it.fileName
+    fileObj.data = new String(Base64.getEncoder().encode(file))
+    body.downloadedFiles.push(fileObj)
+}
+
+
+return body;

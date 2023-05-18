@@ -1,0 +1,28 @@
+{
+   "status": "true",
+   "processVariables":{
+      "SignicatIdCheckStatus": "${body.status}"
+   },
+   "saveToDB":[
+      {
+         "variableName":"SignicatIdCheck",
+         "type":"TEXT",
+         "value":"<@printObjectToJsonString source=body />"
+      },
+      {
+         "variableName":"signicatFirstName",
+         "type":"STRING",
+         "value":"${body.finalResult.firstName}"
+      },
+      {
+         "variableName":"signicatLastName",
+         "type":"STRING",
+         "value":"${body.finalResult.lastName}"
+      },
+      {
+         "variableName":"signicatPersonalIdentificationNumber",
+         "type":"STRING",
+         "value":"${body.finalResult.personalIdentificationNumber}"
+      }
+   ]
+}

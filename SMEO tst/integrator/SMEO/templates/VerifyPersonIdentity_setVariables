@@ -1,0 +1,24 @@
+{
+    "processVariables": {
+        "DossierId": {
+            "value": "${body.payload.dossierId}",
+            "type": "String"
+        },
+        "SignicatProcessId": {
+            "value": "${body.payload.signicatProcessId}",
+            "type": "String"
+        }
+    },
+    "saveToDB": [
+        {
+            "variableName": "dossierId",
+            "type": "STRING",
+            "value": "${body.payload.dossierId}"
+        },
+        {
+            "variableName": "signicatProcessId",
+            "type": "STRING",
+            "value": "${body.payload.signicatProcessId}"
+        }
+    ]
+}

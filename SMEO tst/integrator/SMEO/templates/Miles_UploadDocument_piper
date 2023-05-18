@@ -1,0 +1,14 @@
+{
+    "pipes": [
+        {
+            "name": "Miles_GetSessionID_piper",
+            "type": "action",
+            "script" : "documentType = body.documentType; fileContent = body.fileContent; initBody = body.variables"
+        },
+        {
+            "name": "Miles_UploadDocumentWithSessionId_piper",
+            "type": "action",
+            "script" : "body = body; body.documentType = documentType; body.fileContent = fileContent; body.variables = initBody; headers.handleSoapExceptionTemplate = 'Miles_UploadDocument_error'; headers.handleExceptionTemplate = 'Miles_UploadDocument_error'"
+        }
+    ]
+}

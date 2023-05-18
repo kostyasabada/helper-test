@@ -1,0 +1,9 @@
+{
+    "pipes": [
+        {
+            "type": "action",
+            "name": "getEnvelope",
+            "body": "headers.envelopeID = body.envelopeID"
+        }
+    ]
+}
