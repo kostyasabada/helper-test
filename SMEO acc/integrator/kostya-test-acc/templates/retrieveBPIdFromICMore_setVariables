@@ -1,0 +1,23 @@
+<#if body.errorOccured??>
+    <@printObjectToJson source=body /> 
+<#else>
+{
+    "status": "true",
+    "processVariables": {
+         <#if body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]?? && body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]?has_content>
+                "businessPartnerId": "${body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]}"
+        <#else>
+                "businessPartnerId": ""
+        </#if>
+    }
+     <#if body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]?? && body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]?has_content>
+        ,"saveToDB": [
+            {
+                "variableName": "businessPartnerId",
+                "value": "${body.AccountQueryPage_Output.ListOfAccount.Account.ExternalSystemId?split('_')[1]}",
+                "type": "STRING"
+            }
+        ]
+    </#if>
+}
+</#if>
