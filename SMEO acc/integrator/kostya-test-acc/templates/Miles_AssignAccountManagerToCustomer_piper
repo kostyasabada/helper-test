@@ -1,0 +1,14 @@
+{
+    "pipes": [
+        {
+            "name": "Miles_GetSessionID_piper",
+            "type": "action",
+            "script": "businessPartnerId = body.variables.businessPartnerId;"
+        },
+        {
+            "name": "Miles_AssignAccountManagerToCustomerWithSessionId_piper",
+            "type": "action",
+            "script": "body.businessPartnerId = businessPartnerId"
+        }
+    ]
+}
