@@ -1,9 +1,0 @@
-{
-  "icMorePassword": "Acamo123!@#",
-  "milesPassword": "zDF.LpgP%a",
-  "icMoreEndpoint": "https://secure-ausomxdca.crmondemand.com",
-  "milesEndpointBaseUrl": "api-edc-int.corpinter.net/athlon-miles/v1",
-  "icMoreUsername": "ATHLONCAR/ES_SMEOINT",
-  "milesUser": "sme_online_camunda",
-  "milesEndpointServlet": "servlet/be.sofico.basecamp.servlet.tools.CommandServlet/MWS"
-}

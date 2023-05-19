@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<SofEnvelope>
-    <sessionID>${body.MILES_sessionID}</sessionID>
-    <ratebookquoteids>1699157</ratebookquoteids>
-    <businesspartnerid>400030</businesspartnerid>
-    <dealerid>514650</dealerid>
-</SofEnvelope>

@@ -1,8 +1,0 @@
-{   
-    "status": "true",
-    "errorOccured": "true",
-    "bpmnError": {
-        "bpmnErrorCode": "CallEKYCError",
-        "bpmnErrorMessage": "<#if body.messsage?? && body.message?has_content>${body.message}<#else>EKYC Check Status call failed</#if>"
-    }
-}
