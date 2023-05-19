@@ -1,3 +1,0 @@
-headers.processId = body.variables.processInstanceId
-
-return body;

@@ -1,9 +1,0 @@
-<#assign accountData = body.AccountQueryPage_Output.ListOfAccount.Account>
-{
-    "status": "true",
-    "processVariables": {
-        "RequestedCreditLineLease": "${accountData.CustomCurrency4}",
-        "MaxRentals": "${accountData.CustomNumber6}",
-        "SMEOProcessInstanceId": "${accountData.CustomText56}"
-    }
-}

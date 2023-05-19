@@ -1,8 +1,0 @@
-<#assign businessPartnerId = body.businessPartnerId />
-
-<?xml version="1.0" encoding="UTF-8"?>
-<SofEnvelope>
-    <partnerid>${businessPartnerId}</partnerid>
-    <managerid>616222</managerid>
-    <sessionID>${body.MILES_sessionID}</sessionID>
-</SofEnvelope>

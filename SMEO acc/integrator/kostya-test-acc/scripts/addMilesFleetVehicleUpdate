@@ -1,2 +1,0 @@
-headers['fleetVehicleId']=body.fleetVehicleId;
-headers['fleetVehicleStatus']=body.fleetVehicleStatus;
